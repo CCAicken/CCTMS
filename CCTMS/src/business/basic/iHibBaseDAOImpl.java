@@ -712,4 +712,29 @@ public class iHibBaseDAOImpl implements iHibBaseDAO {
 		return false;
 	}
 
+	@Override
+	public boolean insertList(List<Object> list) {
+		Session session = HibSessionFactory.getSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();// 开始事务
+			for (Object obj : list) {
+				session.save(obj);
+			}
+			tx.commit();// 持久化操作
+			session.close();
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// log.error(LogUtil.error("Basic.iHibBaseDAOImpl.insert",
+			// e));//向日志输出error级别的日志信息
+			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();// 撤销
+			if (session != null)
+				session.close();
+		}
+		return false;
+	}
+
 }
