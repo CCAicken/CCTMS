@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import common.properties.OperType;
 import model.TAdminUser;
+import model.TSystemModel;
 import model.Tuser;
 import model.VAdminUser;
 import annotation.Log;
@@ -71,10 +72,21 @@ public class UserDaoImpl implements UserDAO {
 	}
 
 	@Override
-	public boolean upUserStatus(String userid, Boolean status) {
-		Tuser user = (Tuser) hdao.findById(Tuser.class, userid);
-		user.setStatus(status);
-		return hdao.update(user);
+	public boolean upUserStatus(String userid) {
+		Tuser modelsql = (Tuser) hdao.findById(
+				Tuser.class, userid);
+		String sql = "";
+		if (modelsql.getStatus()) {
+			sql = "update T_User set status=false where userid='"
+					+modelsql.getUserid()+"' ";
+			// modelsql.setIsdelete(false);
+		} else {
+			sql = "update T_User set status=true where userid='"
+					+ modelsql.getUserid()+"' ";
+			// modelsql.setIsdelete(true);
+		}
+
+		return hdao.update(sql);
 	}
 
 	@Log(isSaveLog = true, operationType = OperType.DELETE, operationName = "–ﬁ∏ƒ”√ªß√‹¬Î")

@@ -131,7 +131,11 @@
 		<!-- 条件筛选框End -->
 
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
-
+		
+		<script type="text/html" id="switchTpl">
+		  <input type="checkbox" lay-filter="open" name="status" value="{{d.userid}}" {{ d.isdelete == "0" ? 'checked' : '' }} lay-skin="switch" lay-text="启用|停用">
+		</script>
+		
 		<script type="text/html" id="barDemo">
 			
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">打电话</a>
@@ -142,12 +146,8 @@
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
 				<div class="layui-form-item">
-				      <label class="layui-form-label">用户类型:</label>
-				      <div class="layui-input-block">
-				       	<select id="addusertype">
-						  <option value="">请选择用户类型</option> 
-						</select> 
-				      </div>
+				      
+				      
 				    </div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">账号:</label>
@@ -165,19 +165,19 @@
 					<div class="layui-form-item">
 						<label class="layui-form-label">姓名:</label>
 						<div class="layui-input-block">
-							<input type="text" name="userName" id="userName" autocomplete="off" placeholder="" class="layui-input">
+							<input type="text" name="adduserName" id="adduserName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">性别:</label>
 						<div class="layui-input-block">
-							<input type="text" name="sex" id="sex" autocomplete="off" placeholder="" class="layui-input">
+							<input type="text" name="addsex" id="addsex" autocomplete="off" placeholder="请输入用户性别" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">联系方式:</label>
 						<div class="layui-input-block">
-							<input type="text" name="tel" id="tel" autocomplete="off" placeholder="" class="layui-input">
+							<input type="text" name="addtel" id="addtel" autocomplete="off" placeholder="请输入联系方式" class="layui-input">
 						</div>
 					</div>
 					
@@ -251,6 +251,44 @@
 			 },
 		});
 		
+		form.on('switch(open)', function(data){
+		
+  	 		if(data.elem.checked){
+  	 			//data.value
+  	 			$.ajax({
+				type : 'get',
+				url : '../basic/changestate?id=' + this.value,
+				datatype : 'json',
+				success : function(data) {
+					if (data.code == "0") {		
+						layer.msg('启用成功！请刷新页面', {icon: 1}); 
+					} else {
+	    	        	layer.msg('启用失败！', {icon: 2});
+					}
+				},
+				error : function() {
+					layer.msg('启用失败！请重试', {icon: 2});		
+				}
+				});
+  	 		}else{
+  	 			$.ajax({
+				type : 'get',
+				url : '../basic/changestate?id=' + this.value,
+				datatype : 'json',
+				success : function(data) {
+					if (data.code == "0") {		
+						layer.msg('取消启用成功！请刷新页面', {icon: 1}); 
+					} else {
+	    	        	layer.msg('取消启用失败！', {icon: 2});
+					}
+				},
+				error : function() {
+					layer.msg('取消失败！请重试', {icon: 2});		
+				}
+				});
+  	 		}
+		});
+		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
 			var useridornickname=$("#userName").val().trim();
@@ -270,11 +308,11 @@
 		$("#addartType").click(function(){
 			//加载角色类型
 			loadRoleType('addusertype',form);
-			$("#addUserName").val("");
-			$("#realname").val("");
+			$("#adduserid").val("");
 			$("#addpwd").val("");
-			$("#addpwd").val("");
-			$("#addpwd").val("");
+			$("#adduserName").val("");
+			$("#addsex").val("");
+			$("#addtel").val("");
 			
 			layer.open({
 				type : 1,
@@ -284,30 +322,29 @@
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var addUserName = $("#addUserName").val().trim();
-					var realname = $("#realname").val().trim();
-					var pwd = $("#addpwd").val().trim();
-					var usertype = $("#addusertype").val();
+					var adduserid = $("#adduserid").val().trim();
+					var addpwd = $("#addpwd").val().trim();
+					var adduserName = $("#adduserName").val().trim();
+					var addsex = $("#addsex").val().trim();
+					var addtel = $("#addtel").val().trim();
 
-					if(addUserName == "") {
-						layer.tips('不能为空', '#addUserName');
+					if(adduserid == "") {
+						layer.tips('不能为空1', '#adduserid');
 						return;
 					} 
-					if(realname==""){
-						layer.tips('不能为空', '#realname');
+					if(addpwd==""){
+						layer.tips('不能为空2', '#addpwd');
 						return;
 					}
-					if(pwd == "") {
-						layer.tips('不能为空', '#pwd');
+					if(adduserName == "") {
+						layer.tips('不能为空3', '#adduserName');
 						return;
 					}
-					if(usertype==""){
-						layer.tips('请选择用户类型', '#usertype');
-						return;
-					}
+					
+					
 					$.ajax({
 						type : 'get',
-						url : '../admin/addadminuser?userid=' + addUserName +'&pwd='+pwd+'&roleid='+usertype+'&realname='+realname,
+						url : '../basic/adduser?userid=' + adduserid +'&pwd='+addpwd+'&userName='+adduserName+'&sex='+addsex+'&tel='+addtel,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {

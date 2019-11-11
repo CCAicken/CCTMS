@@ -46,7 +46,7 @@ public interface UserDAO {
 	 * @param user
 	 */
 
-	public boolean upUserStatus(String userid, Boolean status);
+	public boolean upUserStatus(String userid);
 
 	/**
 	 * 修改管理员密码
