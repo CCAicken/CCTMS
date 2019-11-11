@@ -1,13 +1,18 @@
 package business.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import model.TAdminRole;
 import model.TRoleSystemModel;
+import model.TSystemModel;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 
 import annotation.Log;
+import business.basic.HibSessionFactory;
 import business.basic.iHibBaseDAO;
 import business.basic.iHibBaseDAOImpl;
 import business.dao.AdminRoleDAO;
@@ -68,13 +73,50 @@ public class AdminRoleDaoImpl implements AdminRoleDAO {
 	@Log(isSaveLog = true, operationType = OperType.ADD, operationName = "添加管理员角色")
 	@Override
 	public boolean addRole(TAdminRole role) {
-		String procname = "up_addAdminRole(?,?)";
-		Object[] para = { role.getName(), role.getDescription() };
-		int row = (Integer) bdao.executeProduce(procname, para);
-		if (row > 0) {
+		Session session = HibSessionFactory.getSession();
+
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();// 开始事务
+			Serializable key = session.save(role);
+			if (key != null && key != "") {
+
+				List<TSystemModel> modelList = bdao
+						.select("from TSystemModel ");
+				for (TSystemModel tSystemModel : modelList) {
+					TRoleSystemModel sysModel = new TRoleSystemModel();
+					sysModel.setRoleid(Integer.parseInt(key.toString()));
+					sysModel.setSysid(tSystemModel.getId());
+					sysModel.setIsedit(false);
+					session.save(sysModel);
+				}
+
+			}
+
+			tx.commit();// 持久化操作
+
+			session.close();
 			return true;
-		} else {
-			return false;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// log.error(LogUtil.error("Basic.iHibBaseDAOImpl.insert",
+			// e));//向日志输出error级别的日志信息
+			e.printStackTrace();
+			if (tx != null)
+				tx.rollback();// 撤销
+			if (session != null)
+				session.close();
 		}
+		return false;
+
+	}
+
+	public static void main(String[] args) {
+
+		AdminRoleDaoImpl adao = new AdminRoleDaoImpl();
+		TAdminRole role = new TAdminRole();
+		role.setName("测试数据");
+		role.setDescription("测试角色");
+		System.out.println(adao.addRole(role));
 	}
 }
