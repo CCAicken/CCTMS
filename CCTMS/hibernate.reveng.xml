@@ -38,10 +38,15 @@
 			<generator class="assigned"></generator>
 		</primary-key>
 	</table>
-<table name="V_RoleSystemModel" catalog="CCTMS"
-	class="model.VRoleSystemModel">
+	<table name="V_RoleSystemModel" catalog="CCTMS"
+		class="model.VRoleSystemModel">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_User" catalog="CCTMS" class="model.Tuser">
 	<primary-key>
-		<generator class="identity"></generator>
+		<generator class="assigned"></generator>
 	</primary-key>
 </table>
 </hibernate-reverse-engineering>

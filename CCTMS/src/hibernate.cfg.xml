@@ -25,6 +25,7 @@
 		<mapping resource="model/TSystemModel.hbm.xml" />
 		<mapping resource="model/VAdminUser.hbm.xml" />
 		<mapping resource="model/VRoleSystemModel.hbm.xml" />
+		<mapping resource="model/Tuser.hbm.xml" />
 
 	</session-factory>
 
