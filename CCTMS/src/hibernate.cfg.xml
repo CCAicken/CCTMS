@@ -27,6 +27,8 @@
 		<mapping resource="model/VRoleSystemModel.hbm.xml" />
 		<mapping resource="model/Tuser.hbm.xml" />
 		<mapping resource="model/Tcar.hbm.xml" />
+		<mapping resource="model/Tline.hbm.xml" />
+		<mapping resource="model/Tpunchthetloc.hbm.xml" />
 
 	</session-factory>
 

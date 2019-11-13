@@ -49,7 +49,18 @@
 			<generator class="assigned"></generator>
 		</primary-key>
 	</table>
-<table name="T_Car" catalog="CCTMS" class="model.Tcar">
+	<table name="T_Car" catalog="CCTMS" class="model.Tcar">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Line" catalog="CCTMS" class="model.Tline">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_PunchTheTloc" catalog="CCTMS"
+	class="model.Tpunchthetloc">
 	<primary-key>
 		<generator class="identity"></generator>
 	</primary-key>
