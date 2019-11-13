@@ -9,7 +9,9 @@
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
-		<property name="connection.url">jdbc:mysql://116.62.14.178:3306/CCTMS?characterEncoding=UTF-8</property>
+		<property name="connection.url">
+			jdbc:mysql://116.62.14.178:3306/CCTMS?characterEncoding=UTF-8
+		</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password">Llc123456789</property>
 		<property name="connection.driver_class">
@@ -24,6 +26,7 @@
 		<mapping resource="model/VAdminUser.hbm.xml" />
 		<mapping resource="model/VRoleSystemModel.hbm.xml" />
 		<mapping resource="model/Tuser.hbm.xml" />
+		<mapping resource="model/Tcar.hbm.xml" />
 
 	</session-factory>
 

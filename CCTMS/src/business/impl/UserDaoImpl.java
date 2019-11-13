@@ -27,9 +27,9 @@ public class UserDaoImpl implements UserDAO {
 	public List<Tuser> getUserList(String userName, int page, int pageSize) {
 		String hql = "from Tuser ";
 		if (userName != null && !userName.equals("")) {
-			hql += " where userName like '%"+userName+"%' ";
+			hql +=  userName;
 		}
-		hql += " order by userid asc";
+		hql += ") order by userid asc";
 		List<Tuser> list = hdao.selectByPage(hql, page, pageSize);
 		return list;
 	}
@@ -37,9 +37,9 @@ public class UserDaoImpl implements UserDAO {
 	@Log(isSaveLog = false)
 	@Override
 	public int getUserList(String userName){
-		String hql = "select count(userid) from VAdminUser";
+		String hql = "select count(userid) from Tuser";
 		if (userName != null && !userName.equals("")) {
-			hql += " where userName like '%"+userName+"%' ";
+			hql += userName +" ) ";
 		}
 		return hdao.selectValue(hql);
 		

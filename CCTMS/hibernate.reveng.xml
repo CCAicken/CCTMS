@@ -44,9 +44,14 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="T_User" catalog="CCTMS" class="model.Tuser">
+	<table name="T_User" catalog="CCTMS" class="model.Tuser">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+<table name="T_Car" catalog="CCTMS" class="model.Tcar">
 	<primary-key>
-		<generator class="assigned"></generator>
+		<generator class="identity"></generator>
 	</primary-key>
 </table>
 </hibernate-reverse-engineering>

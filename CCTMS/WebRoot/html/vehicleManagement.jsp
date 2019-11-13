@@ -89,26 +89,23 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">账号</td>
-		        <td><span id="userid"></span></td>
-		      </tr>
-		      <tr>
-		        <td class="tdbck">姓名</td>
-		        <td><span id="userName"></span></td>
-		      </tr>
-		      <tr>
-		        <td class="tdbck">性别</td>
-		        <td><span id="sex"></span></td>
-		      </tr>
-		      
-		      <tr>
-		        <td class="tdbck">联系方式</td>
-		        <td><span id="tel"></span></td>
+		        <td class="tdbck">车牌号</td>
+		        <td><span id="carNum"></span></td>
 		      </tr>
 		      <tr>
 		        <td class="tdbck">状态</td>
 		        <td><span id="status"></span></td>
 		      </tr>
+		      <tr>
+		        <td class="tdbck">风扇开关</td>
+		        <td><span id="fanStatus"></span></td>
+		      </tr>
+		      
+		      <tr>
+		        <td class="tdbck">备注</td>
+		        <td><span id="remarks"></span></td>
+		      </tr>
+		      
 		    </tbody>
 		  </table>
 	</div>
@@ -119,13 +116,13 @@
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">
 			  	<div class="layui-input-inline">
-					<input type="text" name="sluserName" id="sluserName" placeholder="请输入用户名或真实姓名" class="layui-input" autocomplete="off">
+					<input type="text" name="slcarNum" id="slcarNum" placeholder="请输入车牌号" class="layui-input" autocomplete="off">
 			    </div>
 			    
 			    <div class="layui-inline">
 	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
 			    </div>
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增用户</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增车辆</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
@@ -133,12 +130,15 @@
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 		
 		<script type="text/html" id="switchTpl">
-		  <input type="checkbox" lay-filter="open" name="status" value="{{d.userid}}" {{ d.status == "0" ? 'checked' : '' }} lay-skin="switch" lay-text="启用|停用">
+		  <input type="checkbox" lay-filter="open" name="status" value="{{d.carId}}" {{ d.status == "0" ? 'checked' : '' }} lay-skin="switch" lay-text="启用|停用">
+		</script>
+		<script type="text/html" id="switchTpl2">
+		  <input type="checkbox" lay-filter="open" name="fanStatus" value="{{d.carId}}" {{ d.fanStatus == "0" ? 'checked' : '' }} lay-skin="switch" lay-text="启用|停用">
 		</script>
 		
 		<script type="text/html" id="barDemo">
 			
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">打电话</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">待定</a>
 		</script>
 
 		<!-- 用户信息添加Start -->
@@ -150,37 +150,19 @@
 				      
 				    </div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">账号:</label>
+						<label class="layui-form-label">车牌号:</label>
 						<div class="layui-input-block">
-							<input type="text" name="adduserid" id="adduserid"
-								lay-verify="addUserName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+							<input type="text" name="addcarNum" id="addcarNum"
+								lay-verify="addcarNum" autocomplete="off" placeholder="请输入用户名" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">用户密码:</label>
+						<label class="layui-form-label">备注:</label>
 						<div class="layui-input-block">
-							<input type="password" name="addpwd" id="addpwd"  autocomplete="off" placeholder="请输入用户密码" class="layui-input">
+							<input type="addremarks" name="addremarks" id="addremarks"  autocomplete="off" placeholder="请输入用户密码" class="layui-input">
 						</div>
 					</div> 
-					<div class="layui-form-item">
-						<label class="layui-form-label">姓名:</label>
-						<div class="layui-input-block">
-							<input type="text" name="adduserName" id="adduserName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">性别:</label>
-						<div class="layui-input-block">
-							<input type="text" name="addsex" id="addsex" autocomplete="off" placeholder="请输入用户性别" class="layui-input">
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">联系方式:</label>
-						<div class="layui-input-block">
-							<input type="text" name="addtel" id="addtel" autocomplete="off" placeholder="请输入联系方式" class="layui-input">
-						</div>
-					</div>
-					
+										
 				</form>
 			</div>
 		</div>
@@ -203,7 +185,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../basic/getuser',
+			url : '../basic/getcar',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -215,27 +197,25 @@
 					align : 'center',
 					width : 80
 				}, {
-					field : 'userid',
-					title : '用户名',
+					field : 'carNum',
+					title : '车牌号',
 					align : 'center'
-				}, {
-					field : 'userName',
-					align : 'center',
-					title : '姓名'
-				},{
-					field : 'sex',
-					align : 'center',
-					title : '性别'
-				},{
-					field : 'tel',
-					align : 'center',
-					title : '联系方式'
 				},{
 					field:'status', 
 					title:'状态',
 					align : 'center',
 					templet: '#switchTpl', 
 					unresize: true
+				},{
+					field:'fanStatus', 
+					title:'风扇开关',
+					align : 'center',
+					templet: '#switchTpl2', 
+					unresize: true
+				},{
+					field : 'remarks',
+					align : 'center',
+					title : '备注'
 				},{
 					title : '操作',
 					toolbar : '#barDemo',
@@ -257,7 +237,7 @@
   	 			//data.value
   	 			$.ajax({
 				type : 'get',
-				url : '../basic/changestate?id=' + this.value,
+				url : '../basic/changecarstate?id=' + this.value+'&type=1',
 				datatype : 'json',
 				success : function(data) {
 					if (data.code == "0") {		
@@ -273,7 +253,45 @@
   	 		}else{
   	 			$.ajax({
 				type : 'get',
-				url : '../basic/changestate?id=' + this.value,
+				url : '../basic/changecarstate?id=' + this.value+'&type=2',
+				datatype : 'json',
+				success : function(data) {
+					if (data.code == "0") {		
+						layer.msg('取消启用成功！请刷新页面', {icon: 1}); 
+					} else {
+	    	        	layer.msg('取消启用失败！', {icon: 2});
+					}
+				},
+				error : function() {
+					layer.msg('取消失败！请重试', {icon: 2});		
+				}
+				});
+  	 		}
+		});
+		
+		form.on('switch2(open)', function(data){
+		
+  	 		if(data.elem.checked){
+  	 			//data.value
+  	 			$.ajax({
+				type : 'get',
+				url : '../basic/changecarstate?id=' + this.value+'&type=2',
+				datatype : 'json',
+				success : function(data) {
+					if (data.code == "0") {		
+						layer.msg('启用成功！请刷新页面', {icon: 1}); 
+					} else {
+	    	        	layer.msg('启用失败！', {icon: 2});
+					}
+				},
+				error : function() {
+					layer.msg('启用失败！请重试', {icon: 2});		
+				}
+				});
+  	 		}else{
+  	 			$.ajax({
+				type : 'get',
+				url : '../basic/changecarstate?id=' + this.value+'&type=2',
 				datatype : 'json',
 				success : function(data) {
 					if (data.code == "0") {		
@@ -291,11 +309,11 @@
 		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
-			var useridornickname=$("#sluserName").val().trim();
+			var useridornickname=$("#slcarNum").val().trim();
 			table.reload('adminUserid', {
 				method : 'post',
 				where : {
-					'userName' : useridornickname,
+					'carNum' : useridornickname,
 					'roleid' : '',
 						},
 				page : {
@@ -308,11 +326,9 @@
 		$("#addartType").click(function(){
 			//加载角色类型
 			loadRoleType('addusertype',form);
-			$("#adduserid").val("");
-			$("#addpwd").val("");
-			$("#adduserName").val("");
-			$("#addsex").val("");
-			$("#addtel").val("");
+			$("#addcarNum").val("");
+			$("#addremarks").val("");
+			
 			
 			layer.open({
 				type : 1,
@@ -322,29 +338,23 @@
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var adduserid = $("#adduserid").val().trim();
-					var addpwd = $("#addpwd").val().trim();
-					var adduserName = $("#adduserName").val().trim();
-					var addsex = $("#addsex").val().trim();
-					var addtel = $("#addtel").val().trim();
+					var addcarNum = $("#addcarNum").val().trim();
+					var addremarks = $("#addremarks").val().trim();
+					
 
-					if(adduserid == "") {
-						layer.tips('不能为空1', '#adduserid');
+					if(addcarNum == "") {
+						layer.tips('不能为空', '#adduserid');
 						return;
 					} 
-					if(addpwd==""){
-						layer.tips('不能为空2', '#addpwd');
-						return;
-					}
-					if(adduserName == "") {
-						layer.tips('不能为空3', '#adduserName');
+					if(addremarks==""){
+						layer.tips('不能为空', '#addpwd');
 						return;
 					}
 					
 					
 					$.ajax({
 						type : 'get',
-						url : '../basic/adduser?userid=' + adduserid +'&pwd='+addpwd+'&userName='+adduserName+'&sex='+addsex+'&tel='+addtel,
+						url : '../basic/addcar?carNum=' + addcarNum +'&remarks='+addremarks,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -382,7 +392,7 @@
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
 			$("#txtclaid").text(data.userid);
-			$("#txtadminuserrealname").text(data.realname);
+			$("#addremarks").text(data.realname);
 			$("#txtadminuserusertype").text(data.name);
 			$("#txtadminuserdesc").text(data.signed);
 			$("#txtadmincreatetime").text(data.createtime);

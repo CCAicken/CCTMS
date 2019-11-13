@@ -41,7 +41,7 @@ public interface UserDAO {
 	public Tuser login(Tuser user);
 
 	/**
-	 * 实现一个管理员用户的添加
+	 * 实现用户状态修改
 	 * 
 	 * @param user
 	 */
