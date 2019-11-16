@@ -27,6 +27,15 @@ public interface LineDAO {
 
 	public int getCarList(String carNum);
 	
+	public List<Tline> getCarList();
+	
+	/**
+	 * 实现线路状态修改
+	 * 
+	 * @param user
+	 */
+
+	public boolean upStatus(int userid);
 	
 
 	/**

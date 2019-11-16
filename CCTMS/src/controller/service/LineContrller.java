@@ -11,6 +11,7 @@ import javax.smartcardio.Card;
 
 import model.TAdminUser;
 import model.Tcar;
+import model.Tline;
 import model.Tpunchthetloc;
 import model.Tuser;
 
@@ -21,14 +22,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import util.Expression;
 import util.LayuiData;
+import business.dao.AdminRoleDAO;
 import business.dao.AdminUserDAO;
 import business.dao.CarDAO;
+import business.dao.LineDAO;
 import business.dao.PunchDAO;
 import business.dao.SystemModelDAO;
 import business.dao.UserDAO;
 import business.factory.DAOFactory;
+import business.impl.AdminRoleDaoImpl;
 import business.impl.AdminUserDaoImpl;
 import business.impl.CarDaoImpl;
+import business.impl.LineDaoImpl;
 import business.impl.PunchDaoImpl;
 import business.impl.UserDaoImpl;
 
@@ -47,22 +52,96 @@ import util.ResponseJSON;
 public class LineContrller {
 	
 	/**
-	 * 获取线路信息列表
+	 * 获取管理员用户列表
 	 * 
+	 * @param request
+	 * @param page
+	 * @param limit
+	 * @param sitename
+	 * @param xcoordinate
+	 * @param ycoordinate
+	 * @param lid
+	 * @param model
 	 */
-	@RequestMapping(value = "/getlinelist")
-	public void getclasslist(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			Model model) throws IOException{
-		
-		
-		
-		
+	@RequestMapping(value = "getline")
+	public void getlineList(HttpServletRequest request, int page,
+			int limit, String carNum, Integer id,
+			HttpServletResponse response, Model model) {
 
+		LineDAO audao = new LineDaoImpl();
+		// 查询条件
+		Expression exp = new Expression();
+
+		if (carNum != null && !carNum.equals("")) {
+
+			exp.andLeftBraLike("sitename", carNum, String.class);
+			
+		}
+		if (id != null && id != 0) {
+			exp.andEqu("lid", id, Integer.class);
+		}
 		
+		String opreation = exp.toString();
+		// System.out.println(opreation);
+		int allcount = audao.getCarList(opreation);
+
+		List list = audao.getCarList(opreation, page, limit);
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+
+		LayuiData laydata = new LayuiData();
+		laydata.code = LayuiData.SUCCESS;
+		laydata.msg = "执行成功";
+		laydata.count = allcount;
+		laydata.data = list;
+		Writer out;
+		try {
+			out = response.getWriter();
+			out.write(JSON.toJSONString(laydata));
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// return "";
 	}
 	
+	/**
+	 * 实现根据传入rolemodelid改变该id功能菜单是否可用
+	 * 
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * */
+	@RequestMapping(value = "changestate")
+	public void changeUserState(Integer id, HttpServletRequest request,
+			HttpServletResponse response, Model model) throws IOException {
+
+		LineDAO smdao = new  LineDaoImpl();
+
+		// 回传json字符串
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
+		LayuiData td = new LayuiData();
+		if (smdao.upStatus(id)) {
+			td.code = LayuiData.SUCCESS;
+
+			td.msg = "启用成功";
+
+			// System.out.println(JSON.toJSON(td));
+		} else {
+			td.code = LayuiData.ERRR;
+			td.msg = "启用失败";
+		}
+		out.write(JSON.toJSONString(td));
+		// {"code":10001,"msg":"执行成功","result1":"......."}
+		out.flush();
+		out.close();
+	}
 	
 	
 	/**
@@ -166,55 +245,7 @@ public class LineContrller {
 	}
 	
 	
-	/**
-	 * 实现根据传入rolemodelid改变该id功能菜单是否可用
-	 * 
-	 * @param carid
-	 * @param type
-	 * @param request
-	 * @param response
-	 * @throws IOException
-	 * */
-	@RequestMapping(value = "changecarstate")
-	public void changeCarState(Integer id,Integer type, HttpServletRequest request,
-			HttpServletResponse response, Model model) throws IOException {
-
-		CarDAO smdao = new  CarDaoImpl();
-
-		// 回传json字符串
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("application/json");
-		PrintWriter out = response.getWriter();
-		LayuiData td = new LayuiData();
-		if(type == 1)
-		{
-			if (smdao.upStatus(id)) {
-				td.code = LayuiData.SUCCESS;
-
-				td.msg = "启用成功";
-
-			// System.out.println(JSON.toJSON(td));
-			} else {
-				td.code = LayuiData.ERRR;
-				td.msg = "启用失败";
-			}
-		}else {
-			if (smdao.upfanStatus(id)) {
-				td.code = LayuiData.SUCCESS;
-
-				td.msg = "启用成功";
-
-				// System.out.println(JSON.toJSON(td));
-			} else {
-				td.code = LayuiData.ERRR;
-				td.msg = "启用失败";
-			}
-		}
-		out.write(JSON.toJSONString(td));
-		// {"code":10001,"msg":"执行成功","result1":"......."}
-		out.flush();
-		out.close();
-	}
+	
 	
 	/**
 	 * 实现车辆的添加
@@ -224,19 +255,19 @@ public class LineContrller {
 	 * @param response
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/addcar")
-	public void addCar(String carNum, String remarks, HttpServletRequest request,
+	@RequestMapping(value = "/addline")
+	public void addline(String taskname, String startpoint,String endpoint, HttpServletRequest request,
 			HttpServletResponse response, Model model) throws IOException {
 		// System.out.println(userid + "," + realname + "," + roleid);
 
-		CarDAO audao = new CarDaoImpl();
+		LineDAO audao = new LineDaoImpl();
 		LayuiData laydata = new LayuiData();
 		// String md5Str = EnCriptUtil.fix(userid, pwd);
 		// String endPwd = EnCriptUtil.getEcriptStr(md5Str, "md5");
-		Tcar user = new Tcar();
-		user.setCarNum(carNum);
-		user.setFanStatus(false);
-		user.setRemarks(remarks);
+		Tline user = new Tline();
+		user.setEndpoint(endpoint);
+		user.setStartpoint(startpoint);
+		user.setTaskname(taskname);
 		user.setStatus(false);
 		
 
@@ -255,6 +286,51 @@ public class LineContrller {
 		out.write(JSON.toJSONString(laydata));
 		out.flush();
 		out.close();
+
+	}
+	
+	/**
+	 * 实现车辆的添加
+	 * 
+	 * @param user
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/getloacdline")
+	public void GetLoacdLine( HttpServletRequest request,
+			HttpServletResponse response, Model model) throws IOException {
+		// System.out.println(userid + "," + realname + "," + roleid);
+
+		LineDAO ardao = new LineDaoImpl();
+		List list = ardao.getCarList();
+
+		// 回传json字符串
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+
+		LayuiData laydata = new LayuiData();
+
+		if (list != null) {
+			laydata.code = LayuiData.SUCCESS;
+			laydata.msg = "查询成功，共查出" + list.size() + "条记录";
+			laydata.data = list;
+		} else {
+			laydata.code = LayuiData.ERRR;
+			laydata.msg = "查询失败";
+		}
+
+		Writer out;
+		try {
+			out = response.getWriter();
+			out.write(JSON.toJSONString(laydata));
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// return "";
 
 	}
 

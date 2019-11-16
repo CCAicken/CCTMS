@@ -609,3 +609,160 @@ table td {
 .weadmin-notice .layui-carousel-ind ul li.layui-this {
   background-color: #999;
 }
+.blogUser-con .layui-table-view {
+			border: none;
+		}
+		
+		.blogUser-con .layui-table-box {
+			margin-top: 10px;
+		}
+		
+		.blogUser-con {
+			padding: 0 15px 15px 15px;
+			margin-bottom:50px;
+		}
+		.blogUser-con  .layui-table-tool-self{
+			display:none;
+		}
+		.blogUser-con .not_border_left {
+			border-left: none !important;
+		}
+		
+		.blogUser-con .blogUser dl dd.layui-this {
+			background-color: #1E9FFF !important;
+		}
+		
+		.blogUser-con .hide {
+			display: none;
+		}
+		
+		.blogUser-con .show {
+			display: block;
+		}
+		
+		.blogUser-con .btn_size {
+			height: 28px !important;
+			line-height: 28px !important;
+		}
+		
+		.blogUser-con .layui-table-body table tbody .layui-table-hover {
+			background: #fffdd3 !important;
+		}
+		
+		.blogUser-con .layui-table-body table tbody .layui-table-click {
+			background: #fdef9b !important;
+		}
+		
+		.blogUser-con .layui-table, .layui-table-view {
+			border: none;
+			margin-top: 0;
+		}
+		
+		#add-blogUser {
+			display: none;
+			z-index: 999 !important;
+		}
+		
+		#add-blogUser .artTypeLayer {
+			width: 90%;
+			margin-left: auto;
+			margin-right: auto;
+			padding-top: 20px;
+		}
+		.adminuserdetail{
+			padding:20px;
+			display: none;
+		}
+		.adminuserdetail table tr td{
+			padding: 15px;text-align: center;
+		}
+		.adminuserdetail .tdbck{
+			background: #f2f2f2;
+			width: 30%;
+		}
+		.blogUser-con .layui-table-view {
+			border: none;
+		}
+		
+		.blogUser-con .layui-table-box {
+			margin-top: 10px;
+		}
+		
+		.blogUser-con {
+			padding: 0 15px 15px 15px;
+			margin-bottom:50px;
+		}
+		.blogUser-con  .layui-table-tool-self{
+			display:none;
+		}
+		.blogUser-con .not_border_left {
+			border-left: none !important;
+		}
+		
+		.blogUser-con .blogUser dl dd.layui-this {
+			background-color: #1E9FFF !important;
+		}
+		
+		.blogUser-con .hide {
+			display: none;
+		}
+		
+		.blogUser-con .show {
+			display: block;
+		}
+		
+		.blogUser-con .btn_size {
+			height: 28px !important;
+			line-height: 28px !important;
+		}
+		
+		.blogUser-con .layui-table-body table tbody .layui-table-hover {
+			background: #fffdd3 !important;
+		}
+		
+		.blogUser-con .layui-table-body table tbody .layui-table-click {
+			background: #fdef9b !important;
+		}
+		
+		.blogUser-con .layui-table, .layui-table-view {
+			border: none;
+			margin-top: 0;
+		}
+		
+		#add-blogUser {
+			display: none;
+			z-index: 999 !important;
+		}
+		
+		#add-blogUser .artTypeLayer {
+			width: 90%;
+			margin-left: auto;
+			margin-right: auto;
+			padding-top: 20px;
+		}
+		.adminuserdetail{
+			padding:20px;
+			display: none;
+		}
+		.adminuserdetail table tr td{
+			padding: 15px;text-align: center;
+		}
+		.adminuserdetail .tdbck{
+			background: #f2f2f2;
+			width: 30%;
+		}
+        .search_form{
+            margin-top: 15px;
+        }
+       .format2{
+           float: left;
+           line-height: 40px;
+           color: #1E9FFF;
+           font-weight: 600;
+           margin-top: 10px;
+       }
+       .box_input{
+	        width: 210px;
+		    float: left;
+		    margin-top: 10px;
+       }

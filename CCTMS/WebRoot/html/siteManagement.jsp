@@ -9,79 +9,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="../layui/css/layui.css" media="all">
-	<style>
-		.blogUser-con .layui-table-view {
-			border: none;
-		}
-		
-		.blogUser-con .layui-table-box {
-			margin-top: 10px;
-		}
-		
-		.blogUser-con {
-			padding: 0 15px 15px 15px;
-			margin-bottom:50px;
-		}
-		.blogUser-con  .layui-table-tool-self{
-			display:none;
-		}
-		.blogUser-con .not_border_left {
-			border-left: none !important;
-		}
-		
-		.blogUser-con .blogUser dl dd.layui-this {
-			background-color: #1E9FFF !important;
-		}
-		
-		.blogUser-con .hide {
-			display: none;
-		}
-		
-		.blogUser-con .show {
-			display: block;
-		}
-		
-		.blogUser-con .btn_size {
-			height: 28px !important;
-			line-height: 28px !important;
-		}
-		
-		.blogUser-con .layui-table-body table tbody .layui-table-hover {
-			background: #fffdd3 !important;
-		}
-		
-		.blogUser-con .layui-table-body table tbody .layui-table-click {
-			background: #fdef9b !important;
-		}
-		
-		.blogUser-con .layui-table, .layui-table-view {
-			border: none;
-			margin-top: 0;
-		}
-		
-		#add-blogUser {
-			display: none;
-			z-index: 999 !important;
-		}
-		
-		#add-blogUser .artTypeLayer {
-			width: 90%;
-			margin-left: auto;
-			margin-right: auto;
-			padding-top: 20px;
-		}
-		.adminuserdetail{
-			padding:20px;
-			display: none;
-		}
-		.adminuserdetail table tr td{
-			padding: 15px;text-align: center;
-		}
-		.adminuserdetail .tdbck{
-			background: #f2f2f2;
-			width: 30%;
-		}
-	</style>
+	<link rel="stylesheet" href="../css/font.css">
+	<link rel="stylesheet" href="../css/index.css">
+	<link rel="stylesheet" href="../layui/css/layui.css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0FuoX30MFf7YMrdS5Wi9GGAcHBblKDuu"></script>
 </head>
 <body>
 	<!--弹框调用内容Start-->
@@ -115,13 +46,14 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">
-			  	<div class="layui-input-inline">
-					<input type="text" name="slsitename" id="slsitename" placeholder="请输入车牌号" class="layui-input" autocomplete="off">
-			    </div>
 				<div class="layui-inline">
-					<select id="slline" name="slline" lay-filter="schoolid">
+					<select id="slline" name="slline" lay-filter="sllineid">
 					</select>
 				</div>
+			  	<div class="layui-input-inline">
+					<input type="text" name="slsitename" id="slsitename" placeholder="请输入站点名称" class="layui-input" autocomplete="off">
+			    </div>
+				
 			    <div class="layui-inline">
 	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
 			    </div>
@@ -143,34 +75,37 @@
 		<div id="add-blogUser">
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
-				<div class="layui-form-item">
-				      
-				      
+				<div class="layui-form-item">				      				      
 				    </div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">站点名称:</label>
 						<div class="layui-input-block">
 							<input type="text" name="addsitename" id="addsitename"
-								lay-verify="addcarNum" autocomplete="off" placeholder="请输入站点名称" class="layui-input">
+								lay-verify="addsitename" autocomplete="off" placeholder="请输入站点名称" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">X坐标:</label>
-						<div class="layui-input-block">
-							<input type="addremarks" name="addxcoordinate" id="addxcoordinate"  autocomplete="off" placeholder="请输入用户密码" class="layui-input">
-						</div>
+						<label class="layui-form-label">选择地点:</label>
+						<a class="layui-btn layui-btn-normal" id="intomap">进入地图</a>
 					</div> 
 					<div class="layui-form-item">
-						<label class="layui-form-label">Y坐标:</label>
+						<label class="layui-form-label">纬度:</label>
 						<div class="layui-input-block">
-							<input type="addremarks" name="addycoordinate" id="addycoordinate"  autocomplete="off" placeholder="请输入用户密码" class="layui-input">
+							<input type="text" name="addxcoordinate" id="addxcoordinate"
+								lay-verify="addxcoordinate" autocomplete="off" readonly class="layui-input">
 						</div>
-					</div> 
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">经度:</label>
+						<div class="layui-input-block">
+							<input type="text" name="addycoordinate" id="addycoordinate"
+								lay-verify="addycoordinate" autocomplete="off" readonly class="layui-input">
+						</div>
+					</div>
 					<div class="layui-form-item">
 						<label class="layui-form-label">选择线路:</label>
 						<div class="layui-inline">
-							<select id="slline" name="slline" lay-filter="schoolid">
-								
+							<select id="addline" name="addline" lay-filter="sllineid">							
 							
 							</select>
 						</div>
@@ -181,6 +116,46 @@
 		</div>
 		<!-- 用户信息添加End -->
 		
+		<!-- 地图坐标点选择弹窗Start -->
+		<div id="add-map" style="display:none;">
+			<div class="layui-container">          
+                <form class="layui-form" action="">
+                        <div class="layui-form-item search_form">
+                                <div class="layui-input-inline">
+                                  <input type="text" name="address" value="" id="where" placeholder="请输入地点"  class="layui-input">
+                                </div>
+                                <button onClick="sear(document.getElementById('where').value);" type="button" class="layui-btn layui-btn-normal">定位</button>
+                              </div>
+                              
+                              <div class="layui-form-item">
+                                <div class="zerocard_add_ys">
+                                        <div class="format2">
+                                   
+                                    <span><img src="../image/p3.png" style="height: 25px; width: 25px;"> 经度：</span>
+                                        </div>
+                                    <div class="box_input">
+                                        <input name="longitude" value=""id="lng" class="layui-input case_text" type="text">
+                                    </div>
+                                    <div class="format2">
+                                       
+                                        <span><img src="../image/p2.png" style="height: 25px; width: 25px;"> 纬度：</span>
+                                    </div>
+                                    <div class="box_input">
+                                        <input name="latitude" value=""id="lat"  class="layui-input case_text" type="text">
+                                    </div>
+                                     
+                                </div>
+                              </div>
+                        </form>
+                
+                
+                <br />
+                
+                
+                <div style="width:100%;height:450px;border:1px solid gray" id="container"></div>
+    </div>
+		</div>
+		<!-- 地图坐标点选择弹窗End -->
 	</div>
 	<script src="../js/jquery-3.3.1.js" charset="utf-8"></script>
 	<script src="../js/loadselect.js" charset="utf-8"></script>
@@ -193,7 +168,9 @@
 			element = layui.element;
 			
 		//调用方法加载select管理员角色
-		loadline("slline",form,"../line/getlinelist");
+		loadline("slline",form,"../line/getloacdline");
+		
+		loadline("addline",form,"../line/getloacdline");
 		
 		
 	
@@ -264,39 +241,50 @@
 			});
 		});
 		
+		
 		/* 添加一个网站用户 */
 		$("#addartType").click(function(){
 			//加载角色类型
 			loadRoleType('addusertype',form);
-			$("#addcarNum").val("");
-			$("#addremarks").val("");
+			$("#addsitename").val("");
+			$("#addxcoordinate").val("");
+			$("#addycoordinate").val("");
+			$("#addline").val("");
+			
 			
 			
 			layer.open({
 				type : 1,
 				title : '管理员用户添加',
-				area : [ '460px', '335px' ],
+				area : [ '650px', '450px' ],
 				shade : 0.4,
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var addcarNum = $("#addcarNum").val().trim();
-					var addremarks = $("#addremarks").val().trim();
+					var addsitename = $("#addsitename").val().trim();
+					var addxcoordinate = $("#addxcoordinate").val().trim();
+					var addycoordinate = $("#addycoordinate").val().trim();
+					var addline = $("#addline").val();
 					
 
-					if(addcarNum == "") {
-						layer.tips('不能为空', '#adduserid');
+					if(addsitename == "") {
+						layer.tips('不能为空', '#addsitename');
 						return;
 					} 
-					if(addremarks==""){
-						layer.tips('不能为空', '#addpwd');
+					if(addxcoordinate==""){
+						layer.tips('不能为空', '#addxcoordinate');
+						return;
+					}
+					if(addycoordinate==""){
+						layer.tips('不能为空', '#addycoordinate');
 						return;
 					}
 					
 					
+					
 					$.ajax({
 						type : 'get',
-						url : '../basic/addcar?carNum=' + addcarNum +'&remarks='+addremarks,
+						url : '../line/addline?sitename=' + addsitename +'&xcoordinate='+addxcoordinate+'&ycoordinate='+addycoordinate+'&lid='+addline,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -327,6 +315,22 @@
 					});						
 				},
 				btn2 : function() {layer.closeAll();}
+			});
+		});
+		
+		/* 打开地图选择经纬度*/
+		$("#intomap").click(function(){
+			//加载角色类型					
+			var laji = layer.open({
+				type : 1,
+				title : '经纬度添加',
+				area : [ 100, 100 ],
+				shade : 0.4,
+				content : $('#add-map'),
+				btn : [ '保存'],
+				yes: function(){
+         			layer.close(laji);
+        		},
 			});
 		});
 	
@@ -407,5 +411,75 @@
 	
 	});
 	</script>
+	<script>
+    var is_empty =0
+    lng = 116.404;
+    lat = 39.915;
+    var map = new BMap.Map("container");//在指定的容器内创建地图实例
+    map.setDefaultCursor("crosshair");//设置地图默认的鼠标指针样式
+    map.enableScrollWheelZoom();//启用滚轮放大缩小，默认禁用。
+    var point =new BMap.Point(lng,lat)
+    map.centerAndZoom(point, 15);
+    map.addControl(new BMap.NavigationControl());
+    var marker = new BMap.Marker(point);        // 创建标注
+    this.map.addOverlay(marker);
+    map.addEventListener("click", function(e){//地图单击事件
+        var geocoder = new BMap.Geocoder();
+        var point = new BMap.Point(e.point.lng,e.point.lat);
+        geocoder.getLocation(point,function(geocoderResult,LocationOptions){
+            map.clearOverlays()
+            map.addControl(new BMap.NavigationControl());
+            var marker = new BMap.Marker(point);        // 创建标注
+            this.map.addOverlay(marker);
+            //定位成功
+            var address = geocoderResult.address;
+            document.getElementById("where").value =address
+            layer.msg('定位成功');
+            // $('#suggestId').val(geocoderResult.address);
+        });
+        document.getElementById("lng").value = e.point.lng;
+        document.getElementById("lat").value = e.point.lat;
+        document.getElementById("addxcoordinate").value = e.point.lng;
+        document.getElementById("addycoordinate").value = e.point.lat; 
+    });
+    function iploac(result){//根据IP设置地图中心
+        var cityName = result.name;
+        map.setCenter(cityName);
+    }
+    if(is_empty ==0){
+        // var myCity = new BMap.LocalCity();
+        // myCity.get(iploac);
+        dingwei()
+    }
+    function dingwei() {
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+                document.getElementById("lng").value = r.point.lng;
+                document.getElementById("addxcoordinate").value = r.point.lng;
+                document.getElementById("lat").value = r.point.lat;
+                document.getElementById("addycoordinate").value = r.point.lat;
+                var city_name =r.address.province + r.address.city;
+                document.getElementById("where").value = city_name
+            }
+            else {
+                console.log('获取失败');
+            }
+        });
+    }
+    function sear(result){//地图搜索
+        if(result.length ==0){
+            dingwei();
+            return false
+        }
+        var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+        local.search(result);
+    }
+</script>
 </body>
 </html>

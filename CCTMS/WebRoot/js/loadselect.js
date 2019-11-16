@@ -36,8 +36,8 @@ function loadline(selectId, form, reqURL){
 		if(stageData.code == 0) {
 			$('#' + selectId).html(""); //获取id为selectId指定的控件内容
 			var str = "<option value='0'>请选择线路</option>";
-			for(var i = 0; i < stageData.resultObject.length; i++) {
-				str += '<option value=' + stageData.resultObject[i].lid + '>' + stageData.resultObject[i].taskname + '</option>';
+			for(var i = 0; i < stageData.data.length; i++) {
+				str += '<option value=' + stageData.data[i].lid + '>' + stageData.data[i].taskname + '</option>';
 			}
 			$('#' + selectId).append(str);
 			form.render("select");
