@@ -29,7 +29,7 @@ public class PunchDaoImpl implements PunchDAO {
 		if (sitename != null && !sitename.equals("")) {
 			hql +=  sitename;
 		}
-		hql += ") order by carId asc";
+		hql += " order by pttid asc";
 		List<Tpunchthetloc> list = hdao.selectByPage(hql, page, pageSize);
 		return list;
 	}
@@ -39,7 +39,7 @@ public class PunchDaoImpl implements PunchDAO {
 	public int getPunchList(String sitename) {
 		String hql = "select count(pttid) from Tpunchthetloc ";
 		if (sitename != null && !sitename.equals("")) {
-			hql += sitename +" ) ";
+			hql += sitename +"  ";
 		}
 		return hdao.selectValue(hql);
 	}

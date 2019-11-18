@@ -68,7 +68,7 @@
 		
 		<script type="text/html" id="barDemo">
 			
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">修改</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 
 		<!-- 用户信息添加Start -->
@@ -284,7 +284,7 @@
 					
 					$.ajax({
 						type : 'get',
-						url : '../line/addline?sitename=' + addsitename +'&xcoordinate='+addxcoordinate+'&ycoordinate='+addycoordinate+'&lid='+addline,
+						url : '../line/addpunch?sitename=' + addsitename +'&xcoordinate='+addxcoordinate+'&ycoordinate='+addycoordinate+'&lid='+addline,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
