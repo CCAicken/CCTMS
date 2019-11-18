@@ -29,6 +29,9 @@
 		<mapping resource="model/Tcar.hbm.xml" />
 		<mapping resource="model/Tline.hbm.xml" />
 		<mapping resource="model/Tpunchthetloc.hbm.xml" />
+		<mapping resource="model/Tlinearrange.hbm.xml" />
+		<mapping resource="model/Vdutyarrange.hbm.xml" />
+		<mapping resource="model/Tdutyarrange.hbm.xml" />
 
 	</session-factory>
 

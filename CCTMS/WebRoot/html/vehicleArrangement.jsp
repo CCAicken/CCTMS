@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>行车安排</title>
+	<title>网站用户管理</title>
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -89,27 +89,18 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">线路名称</td>
-		        <td><span id="taskname"></span></td>
+		        <td class="tdbck">用户名</td>
+		        <td><span id="userName"></span></td>
 		      </tr>
 		      <tr>
 		        <td class="tdbck">车牌号</td>
 		        <td><span id="carNum"></span></td>
 		      </tr>
-		       <tr>
-		        <td class="tdbck">用户名</td>
-		        <td><span id="userName"></span></td>
-		      </tr>
-		      <tr>
-		        <td class="tdbck">温度阈值</td>
-		        <td><span id="tthresho"></span></td>
-		      </tr>
 		      
 		      <tr>
-		        <td class="tdbck">备注</td>
-		        <td><span id="remarks"></span></td>
+		        <td class="tdbck">创建时间</td>
+		        <td><span id="txtadmincreatetime"></span></td>
 		      </tr>
-		      
 		    </tbody>
 		  </table>
 	</div>
@@ -119,68 +110,49 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">
-				<div class="layui-inline">
-					<select id="slline" name="slline" lay-filter="sllineid">
-					</select>
-				</div>
 			  	<div class="layui-input-inline">
-					<input type="text" name="slcarNum" id="slcarNum" placeholder="请输入车牌号" class="layui-input" autocomplete="off">
+					<input type="text" name="sluserName" id="sluserName" placeholder="请输入用户名" class="layui-input" autocomplete="off">
 			    </div>
-			    
+			   
 			    <div class="layui-inline">
 	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
 			    </div>
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增车辆</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增用户</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
 
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
-		
-		
-		
+
 		<script type="text/html" id="barDemo">
 			
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">待定</a>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 
 		<!-- 用户信息添加Start -->
 		<div id="add-blogUser">
 			<div class="artTypeLayer">
 				<form class="layui-form" action="">
-				<div class="layui-form-item">
-				      
-				      
-				    </div>
+				
+				   
+					<div class="layui-form-item">
+						<label class="layui-form-label">选择用户:</label>
+						<div class="layui-inline">
+							<select id="adduserid" name="adduserid" lay-filter="adduserid">							
+							
+							</select>
+						</div>
+					</div> 
+					<div class="layui-form-item">
+						<label class="layui-form-label">选择车辆:</label>
+						<div class="layui-inline">
+							<select id="addcarid" name="addcarid" lay-filter="addcarid">							
+							
+							</select>
+						</div>
+					</div> 
 					
-					<div class="layui-form-item">
-						<label class="layui-form-label">选择线路:</label>
-						<div class="layui-inline">
-							<select id="addline" name="addline" lay-filter="addline">							
-							
-							</select>
-						</div>
-					</div> 
-					<div class="layui-form-item">
-						<label class="layui-form-label">选择车辆安排:</label>
-						<div class="layui-inline">
-							<select id="adddaid" name="adddaid" lay-filter="adddaid">							
-							
-							</select>
-						</div>
-					</div> 
-					<div class="layui-form-item">
-						<label class="layui-form-label">温度阈值:</label>
-						<div class="layui-input-block">
-							<input type="addtthresho" name="addtthresho" id="addtthresho"  autocomplete="off" placeholder="请输入用户密码" class="layui-input">
-						</div>
-					</div> 
-					<div class="layui-form-item">
-						<label class="layui-form-label">备注:</label>
-						<div class="layui-input-block">
-							<input type="addremarks" name="addremarks" id="addremarks"  autocomplete="off" placeholder="请输入用户密码" class="layui-input">
-						</div>
-					</div> 			
+					
 				</form>
 			</div>
 		</div>
@@ -197,15 +169,14 @@
 			laydate = layui.laydate, laytpl = layui.laytpl,
 			element = layui.element;
 	
-		loadline("addline",form,"../line/getloacdline");
-		loadline("slline",form,"../line/getloacdline");
-		loadduty("adddaid",form,"../line/getloacdduty");
-		/*加载表格*/
+		//加载角色类型
+		loaduser("adduserid",form,"../line/getloacduser");
+		loadcar("addcarid",form,"../line/getloacdcar");
 		/*加载表格*/
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../basic/getarrange',
+			url : '../line/getduty',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -217,21 +188,13 @@
 					align : 'center',
 					width : 80
 				}, {
-					field : 'lid',
-					title : '车牌号',
+					field : 'userName',
+					title : '用户名',
 					align : 'center'
 				},{
-					field : 'daid',
-					title : '车牌号',
-					align : 'center'
-				},{
-					field : 'tthresho',
-					title : '温度阈值',
-					align : 'center'
-				},{
-					field : 'remarks',
+					field : 'carNum',
 					align : 'center',
-					title : '备注'
+					title : '车牌号'
 				},{
 					title : '操作',
 					toolbar : '#barDemo',
@@ -247,18 +210,14 @@
 			 },
 		});
 		
-		
-		
-		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
-			var useridornickname=$("#slcarNum").val().trim();
-			var id=$("#slline").val().trim();
+			var useridornickname=$("#sluserName").val().trim();
 			table.reload('adminUserid', {
 				method : 'post',
 				where : {
-					'carNum' : useridornickname,
-					'id' : id,
+					'realname' : useridornickname,
+					'roleid' : '',
 						},
 				page : {
 					curr : 1
@@ -270,11 +229,8 @@
 		$("#addartType").click(function(){
 			//加载角色类型
 			loadRoleType('addusertype',form);
-			$("#addline").val("");
-			$("#adddaid").val("");
-			$("#addtthresho").val("");
-			$("#addremarks").val("");
-			
+			$("#adduserid").val("");
+			$("#addcarid").val("");
 			
 			layer.open({
 				type : 1,
@@ -284,25 +240,22 @@
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var addline = $("#addline").val().trim();
-					var adddaid = $("#adddaid").val().trim();
-					var addtthresho = $("#addtthresho").val().trim();
-					var addremarks = $("#addremarks").val().trim();
+					var adduserid = $("#adduserid").val().trim();
+					var addcarid = $("#addcarid").val().trim();
 					
 
-					if(addline == "") {
-						layer.tips('不能为空', '#adduserid');
+					if(addcarid == "") {
+						layer.tips('不能为空', '#addcarid');
 						return;
 					} 
-					if(adddaid==""){
-						layer.tips('不能为空', '#addpwd');
+					if(adduserid==""){
+						layer.tips('不能为空', '#adduserid');
 						return;
 					}
 					
-					
 					$.ajax({
 						type : 'get',
-						url : '../line/addarrange?lid=' + addline +'&daid='+adddaid+'&tthresho='+addtthresho+'&remarks='+addremarks,
+						url : '../line/addduty?userid=' + adduserid +'&carid='+addcarid,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -340,7 +293,7 @@
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
 			$("#txtclaid").text(data.userid);
-			$("#addremarks").text(data.realname);
+			$("#txtadminuserrealname").text(data.realname);
 			$("#txtadminuserusertype").text(data.name);
 			$("#txtadminuserdesc").text(data.signed);
 			$("#txtadmincreatetime").text(data.createtime);

@@ -103,4 +103,12 @@ public class CarDaoImpl implements CarDAO {
 		return hdao.update(user);
 	}
 
+	@Override
+	public List<Tcar> getCarList() {
+		String hql = "from Tcar ";
+		
+		List<Tcar> list = hdao.select(hql);
+		return list;
+	}
+
 }

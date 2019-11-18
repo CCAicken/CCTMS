@@ -4,8 +4,10 @@ import java.util.List;
 
 import model.TAdminUser;
 import model.Tcar;
+import model.Tdutyarrange;
 import model.Tuser;
 import model.VAdminUser;
+import model.Vdutyarrange;
 
 /**
  * 管理端管理员用户业务接口
@@ -13,7 +15,7 @@ import model.VAdminUser;
  * @author Administrator
  *
  */
-public interface CarDAO {
+public interface DutyDAO {
 
 	/**
 	 * 根据条件获取车辆列表
@@ -21,28 +23,14 @@ public interface CarDAO {
 	 * @param carNum
 	 * @return List
 	 */
-	public List<Tcar> getCarList(String carNum, int page,
+	public List<Vdutyarrange> getDutyList(String carNum, int page,
 			int pageSize);
 
-	public int getCarList(String carNum);
+	public int getDutyList(String carNum);
 	
-	public List<Tcar> getCarList();
+	public List<Vdutyarrange> getDutyList();
 	
-	/**
-	 * 实现车辆状态修改
-	 * 
-	 * @param user
-	 */
-
-	public boolean upStatus(int userid);
 	
-	/**
-	 * 实现车辆风扇状态修改
-	 * 
-	 * @param user
-	 */
-
-	public boolean upfanStatus(int userid);
 
 	/**
 	 * 实现一个车辆的添加
@@ -50,7 +38,7 @@ public interface CarDAO {
 	 * @param model
 	 */
 
-	public boolean addUser(Tcar model);
+	public boolean addUser(Tdutyarrange model);
 
 
 	/**
@@ -59,7 +47,7 @@ public interface CarDAO {
 	 * @param carid
 	 *            用户id
 	 */
-	public Tcar getbyID(String carid);
+	public Tdutyarrange getbyID(String carid);
 
 	/**
 	 * 更新用户
@@ -67,5 +55,5 @@ public interface CarDAO {
 	 * @param user
 	 * @return
 	 */
-	public boolean update(TAdminUser user);
+	public boolean update(Tdutyarrange user);
 }

@@ -20,21 +20,21 @@
 		<table class="layui-table">
 		    <tbody>
 		      <tr>
-		        <td class="tdbck">站点名称</td>
-		        <td><span id="sitename"></span></td>
+		        <td class="tdbck">线路名称</td>
+		        <td><span id="taskname"></span></td>
 		      </tr>
 		      <tr>
-		        <td class="tdbck">经度</td>
-		        <td><span id="xcoordinate"></span></td>
+		        <td class="tdbck">起点</td>
+		        <td><span id="startpoint"></span></td>
 		      </tr>
 		      <tr>
-		        <td class="tdbck">纬度</td>
-		        <td><span id="ycoordinate"></span></td>
+		        <td class="tdbck">终点</td>
+		        <td><span id="endpoint"></span></td>
 		      </tr>
 		      
 		      <tr>
-		        <td class="tdbck">线路名称</td>
-		        <td><span id="taskname"></span></td>
+		        <td class="tdbck">状态</td>
+		        <td><span id="status"></span></td>
 		      </tr>
 		      
 		    </tbody>
@@ -46,25 +46,24 @@
 		<!-- 条件筛选框Start -->
 		<blockquote class="layui-elem-quote not_border_left">
 			<form class="layui-form" action="">
-				<div class="layui-inline">
-					<select id="slline" name="slline" lay-filter="sllineid">
-					</select>
-				</div>
+				
 			  	<div class="layui-input-inline">
-					<input type="text" name="slsitename" id="slsitename" placeholder="请输入站点名称" class="layui-input" autocomplete="off">
+					<input type="text" name="sltaskname" id="sltaskname" placeholder="请输入线路名称" class="layui-input" autocomplete="off">
 			    </div>
 				
 			    <div class="layui-inline">
 	     	   		<button id="btnselfrontinfo" type="button" class="layui-btn layui-bg-blue">查询</button>
 			    </div>
-				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增站点</button>
+				<button type="button" class="layui-btn layui-bg-blue" id="addartType" lay-event="addartType" lay-filter="addartType" style="margin-left: 10px;">新增线路</button>
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
 
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 		
-		
+		<script type="text/html" id="switchTpl">
+		  <input type="checkbox" lay-filter="open" name="status" value="{{d.lid}}" {{ d.status == "0" ? 'checked' : '' }} lay-skin="switch" lay-text="启用|停用">
+		</script>
 		
 		<script type="text/html" id="barDemo">
 			
@@ -78,51 +77,46 @@
 				<div class="layui-form-item">				      				      
 				    </div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">站点名称:</label>
+						<label class="layui-form-label">线路名称:</label>
 						<div class="layui-input-block">
-							<input type="text" name="addsitename" id="addsitename"
-								lay-verify="addsitename" autocomplete="off" placeholder="请输入站点名称" class="layui-input">
+							<input type="text" name="addtaskname" id="addtaskname"
+								lay-verify="addtaskname" autocomplete="off" placeholder="请输入线路名称" class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">选择地点:</label>
+						<label class="layui-form-label">选择起点:</label>
 						<a class="layui-btn layui-btn-normal" id="intomap">进入地图</a>
 					</div> 
 					<div class="layui-form-item">
-						<label class="layui-form-label">纬度:</label>
+						<label class="layui-form-label">起点:</label>
 						<div class="layui-input-block">
-							<input type="text" name="addxcoordinate" id="addxcoordinate"
+							<input type="text" name="addstartpoint" id="addstartpoint"
 								lay-verify="addxcoordinate" autocomplete="off" readonly class="layui-input">
 						</div>
 					</div>
 					<div class="layui-form-item">
-						<label class="layui-form-label">经度:</label>
+						<label class="layui-form-label">选择终点:</label>
+						<a class="layui-btn layui-btn-normal" id="intoENDmap">进入地图</a>
+					</div> 
+					<div class="layui-form-item">
+						<label class="layui-form-label">终点:</label>
 						<div class="layui-input-block">
-							<input type="text" name="addycoordinate" id="addycoordinate"
+							<input type="text" name="addendpoint" id="addendpoint"
 								lay-verify="addycoordinate" autocomplete="off" readonly class="layui-input">
 						</div>
-					</div>
-					<div class="layui-form-item">
-						<label class="layui-form-label">选择线路:</label>
-						<div class="layui-inline">
-							<select id="addline" name="addline" lay-filter="sllineid">							
-							
-							</select>
-						</div>
-					</div> 
-										
+					</div>							
 				</form>
 			</div>
 		</div>
 		<!-- 用户信息添加End -->
 		
-		<!-- 地图坐标点选择弹窗Start -->
+		<!-- 地图起点选择弹窗Start -->
 		<div id="add-map" style="display:none;">
 			<div class="layui-container">          
                 <form class="layui-form" action="">
                         <div class="layui-form-item search_form">
                                 <div class="layui-input-inline">
-                                  <input type="text" name="address" value="" id="where" placeholder="请输入地点"  class="layui-input">
+                                  <input type="text" name="address" value="" id="where" placeholder="请输入线路名称"  class="layui-input">
                                 </div>
                                 <button onClick="sear(document.getElementById('where').value);" type="button" class="layui-btn layui-btn-normal">定位</button>
                               </div>
@@ -156,6 +150,47 @@
     </div>
 		</div>
 		<!-- 地图坐标点选择弹窗End -->
+		
+		<!-- 地图终点选择弹窗Start -->
+		<div id="addENDmap" style="display:none;">
+			<div class="layui-container">          
+                <form class="layui-form" action="">
+                        <div class="layui-form-item search_form">
+                                <div class="layui-input-inline">
+                                  <input type="text" name="address" value="" id="where2" placeholder="请输入地点"  class="layui-input">
+                                </div>
+                                <button onClick="sear(document.getElementById('where').value);" type="button" class="layui-btn layui-btn-normal">定位</button>
+                              </div>
+                              
+                              <div class="layui-form-item">
+                                <div class="zerocard_add_ys">
+                                        <div class="format2">
+                                   
+                                    <span><img src="../image/p3.png" style="height: 25px; width: 25px;"> 经度：</span>
+                                        </div>
+                                    <div class="box_input">
+                                        <input name="longitude" value=""id="lng2" class="layui-input case_text" type="text">
+                                    </div>
+                                    <div class="format2">
+                                       
+                                        <span><img src="../image/p2.png" style="height: 25px; width: 25px;"> 纬度：</span>
+                                    </div>
+                                    <div class="box_input">
+                                        <input name="latitude" value=""id="lat2"  class="layui-input case_text" type="text">
+                                    </div>
+                                     
+                                </div>
+                              </div>
+                        </form>
+                
+                
+                <br />
+                
+                
+                <div style="width:100%;height:450px;border:1px solid gray" id="container2"></div>
+    </div>
+		</div>
+		<!-- 地图坐标点选择弹窗End -->
 	</div>
 	<script src="../js/jquery-3.3.1.js" charset="utf-8"></script>
 	<script src="../js/loadselect.js" charset="utf-8"></script>
@@ -167,10 +202,7 @@
 			laydate = layui.laydate, laytpl = layui.laytpl,
 			element = layui.element;
 			
-		//调用方法加载select管理员角色
-		loadline("slline",form,"../line/getloacdline");
 		
-		loadline("addline",form,"../line/getloacdline");
 		
 		
 	
@@ -180,7 +212,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../line/getpunch',
+			url : '../line/getline',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -192,21 +224,23 @@
 					align : 'center',
 					width : 80
 				},{
-					field : 'sitename',
-					title : '站点名称',
+					field : 'taskname',
+					title : '线路名称',
 					align : 'center'
 				},{
-					field : 'xcoordinate',
-					title : '经度',
+					field : 'startpoint',
+					title : '起点',
 					align : 'center'
 				},{
-					field : 'ycoordinate',
-					title : '维度',
+					field : 'endpoint',
+					title : '终点',
 					align : 'center'
 				},{
-					field:'taskname', 
-					title:'线路名称',
+					field:'status', 
+					title:'状态',
 					align : 'center',
+					templet: '#switchTpl', 
+					unresize: true
 					
 				},{
 					title : '操作',
@@ -227,13 +261,13 @@
 		
 		/* 点击查询对网站用户进行筛选 */
 		$("#btnselfrontinfo").click(function(){
-			var useridornickname=$("#slsitename").val().trim();
-			var id=$("#slline").val().trim();
+			var useridornickname=$("#sltaskname").val().trim();
+			
 			table.reload('adminUserid', {
 				method : 'post',
 				where : {
 					'carNum' : useridornickname,
-					'id' : id,
+					
 						},
 				page : {
 					curr : 1
@@ -242,14 +276,52 @@
 		});
 		
 		
+		
+		form.on('switch(open)', function(data){
+		
+  	 		if(data.elem.checked){
+  	 			//data.value
+  	 			$.ajax({
+				type : 'get',
+				url : '../line/changestate?id=' + this.value,
+				datatype : 'json',
+				success : function(data) {
+					if (data.code == "0") {		
+						layer.msg('启用成功！请刷新页面', {icon: 1}); 
+					} else {
+	    	        	layer.msg('启用失败！', {icon: 2});
+					}
+				},
+				error : function() {
+					layer.msg('启用失败！请重试', {icon: 2});		
+				}
+				});
+  	 		}else{
+  	 			$.ajax({
+				type : 'get',
+				url : '../line/changestate?id=' + this.value,
+				datatype : 'json',
+				success : function(data) {
+					if (data.code == "0") {		
+						layer.msg('取消启用成功！请刷新页面', {icon: 1}); 
+					} else {
+	    	        	layer.msg('取消启用失败！', {icon: 2});
+					}
+				},
+				error : function() {
+					layer.msg('取消失败！请重试', {icon: 2});		
+				}
+				});
+  	 		}
+		});
+		
 		/* 添加一个网站用户 */
 		$("#addartType").click(function(){
 			//加载角色类型
 			loadRoleType('addusertype',form);
-			$("#addsitename").val("");
-			$("#addxcoordinate").val("");
-			$("#addycoordinate").val("");
-			$("#addline").val("");
+			$("#addtaskname").val("");
+			$("#addstartpoint").val("");
+			$("#addendpoint").val("");
 			
 			
 			
@@ -261,21 +333,21 @@
 				content : $('#add-blogUser'),
 				btn : [ '保存', '返回' ],
 				yes : function() {
-					var addsitename = $("#addsitename").val().trim();
-					var addxcoordinate = $("#addxcoordinate").val().trim();
-					var addycoordinate = $("#addycoordinate").val().trim();
-					var addline = $("#addline").val();
+					var addtaskname = $("#addtaskname").val().trim();
+					var addstartpoint = $("#addstartpoint").val().trim();
+					var addendpoint = $("#addendpoint").val().trim();
+					
 					
 
-					if(addsitename == "") {
-						layer.tips('不能为空', '#addsitename');
+					if(addtaskname == "") {
+						layer.tips('不能为空', '#addtaskname');
 						return;
 					} 
-					if(addxcoordinate==""){
+					if(addstartpoint==""){
 						layer.tips('不能为空', '#addxcoordinate');
 						return;
 					}
-					if(addycoordinate==""){
+					if(addendpoint==""){
 						layer.tips('不能为空', '#addycoordinate');
 						return;
 					}
@@ -284,7 +356,7 @@
 					
 					$.ajax({
 						type : 'get',
-						url : '../line/addpunch?sitename=' + addsitename +'&xcoordinate='+addxcoordinate+'&ycoordinate='+addycoordinate+'&lid='+addline,
+						url : '../line/addline?taskname=' + addtaskname +'&startpoint='+addstartpoint+'&endpoint='+addendpoint,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
@@ -329,6 +401,30 @@
 				content : $('#add-map'),
 				btn : [ '保存'],
 				yes: function(){
+					var str1 = document.getElementById("where").value;
+					var str2 = document.getElementById("lng").value;
+					var str3 = document.getElementById("lat").value;
+					document.getElementById("addstartpoint").value = '地点名称:'+str1+' 经度:'+str2+' 纬度:'+str3;
+         			layer.close(laji);
+        		},
+			});
+		});
+		
+		/* 打开地图选择终点*/
+		$("#intoENDmap").click(function(){
+			//加载角色类型					
+			var laji = layer.open({
+				type : 1,
+				title : '经纬度添加',
+				area : [ 100, 100 ],
+				shade : 0.4,
+				content : $('#addENDmap'),
+				btn : [ '保存'],
+				yes: function(){
+					var str1 = document.getElementById("where2").value;
+					var str2 = document.getElementById("lng2").value;
+					var str3 = document.getElementById("lat2").value;
+					document.getElementById("addendpoint").value = '地点名称:'+str1+' 经度:'+str2+' 纬度:'+str3;
          			layer.close(laji);
         		},
 			});
@@ -439,8 +535,7 @@
         });
         document.getElementById("lng").value = e.point.lng;
         document.getElementById("lat").value = e.point.lat;
-        document.getElementById("addxcoordinate").value = e.point.lng;
-        document.getElementById("addycoordinate").value = e.point.lat; 
+       
     });
     function iploac(result){//根据IP设置地图中心
         var cityName = result.name;
@@ -459,11 +554,80 @@
                 map.addOverlay(mk);
                 map.panTo(r.point);
                 document.getElementById("lng").value = r.point.lng;
-                document.getElementById("addxcoordinate").value = r.point.lng;
+                
                 document.getElementById("lat").value = r.point.lat;
-                document.getElementById("addycoordinate").value = r.point.lat;
+              
                 var city_name =r.address.province + r.address.city;
                 document.getElementById("where").value = city_name
+            }
+            else {
+                console.log('获取失败');
+            }
+        });
+    }
+    function sear(result){//地图搜索
+        if(result.length ==0){
+            dingwei();
+            return false
+        }
+        var local = new BMap.LocalSearch(map, {
+            renderOptions:{map: map}
+        });
+        local.search(result);
+    }
+</script>
+<script>
+    var is_empty =0
+    lng = 116.404;
+    lat = 39.915;
+    var map = new BMap.Map("container2");//在指定的容器内创建地图实例
+    map.setDefaultCursor("crosshair");//设置地图默认的鼠标指针样式
+    map.enableScrollWheelZoom();//启用滚轮放大缩小，默认禁用。
+    var point =new BMap.Point(lng,lat)
+    map.centerAndZoom(point, 15);
+    map.addControl(new BMap.NavigationControl());
+    var marker = new BMap.Marker(point);        // 创建标注
+    this.map.addOverlay(marker);
+    map.addEventListener("click", function(e){//地图单击事件
+        var geocoder = new BMap.Geocoder();
+        var point = new BMap.Point(e.point.lng,e.point.lat);
+        geocoder.getLocation(point,function(geocoderResult,LocationOptions){
+            map.clearOverlays()
+            map.addControl(new BMap.NavigationControl());
+            var marker = new BMap.Marker(point);        // 创建标注
+            this.map.addOverlay(marker);
+            //定位成功
+            var address = geocoderResult.address;
+            document.getElementById("where2").value =address
+            layer.msg('定位成功');
+            // $('#suggestId').val(geocoderResult.address);
+        });
+       
+        document.getElementById("lng2").value = e.point.lng;
+        document.getElementById("lat2").value = e.point.lat; 
+    });
+    function iploac(result){//根据IP设置地图中心
+        var cityName = result.name;
+        map.setCenter(cityName);
+    }
+    if(is_empty ==0){
+        // var myCity = new BMap.LocalCity();
+        // myCity.get(iploac);
+        dingwei()
+    }
+    function dingwei() {
+        var geolocation = new BMap.Geolocation();
+        geolocation.getCurrentPosition(function(r){
+            if(this.getStatus() == BMAP_STATUS_SUCCESS){
+                var mk = new BMap.Marker(r.point);
+                map.addOverlay(mk);
+                map.panTo(r.point);
+             
+                document.getElementById("lng2").value = r.point.lng;
+               
+                document.getElementById("lat2").value = r.point.lat;
+                var city_name =r.address.province + r.address.city;
+                document.getElementById("where2").value = city_name
             }
             else {
                 console.log('获取失败');

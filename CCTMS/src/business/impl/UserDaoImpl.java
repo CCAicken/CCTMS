@@ -108,4 +108,12 @@ public class UserDaoImpl implements UserDAO {
 		return hdao.update(user);
 	}
 
+	@Override
+	public List<Tuser> getUserList() {
+		String hql = "from Tuser ";
+		
+		List<Tuser> list = hdao.select(hql);
+		return list;
+	}
+
 }
