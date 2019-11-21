@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../layui/css/layui.css" media="all">
 	<link rel="stylesheet" href="../css/font.css">
 	<link rel="stylesheet" href="../css/index.css">
+	 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js'></script>
 	<link rel="stylesheet" href="../layui/css/layui.css" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=0FuoX30MFf7YMrdS5Wi9GGAcHBblKDuu"></script>
 </head>
@@ -62,6 +63,8 @@
 			</form>
 		</blockquote>
 		<!-- 条件筛选框End -->
+		
+		
 
 		<table class="layui-hide" name="blogUser" id="blogUser" lay-filter="blogUser"></table>
 		
@@ -70,8 +73,8 @@
 		</script>
 		
 		<script type="text/html" id="barDemo">
-			
-			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">查看</a>
+			<input value={{d.laid}} style="display:none;" class="detailid"/>
+			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="detail" >查看</a>
 		</script>
 
 		
@@ -169,18 +172,30 @@
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
-			$("#txtclaid").text(data.userid);
-			$("#addremarks").text(data.realname);
-			$("#txtadminuserusertype").text(data.name);
-			$("#txtadminuserdesc").text(data.signed);
-			$("#txtadmincreatetime").text(data.createtime);
+			
+			$(".detailid").text(data.laid);
+			
+			
+			
 			
 			switch (obj.event) {
 				
 				
 				//删除按钮操作
-				case 'del':
+				case 'detail':
 					
+					layer.open({
+  						type:2,
+  						title: '温度报表',
+  						offset: 'auto',
+  						area: ['700px', '550px'],
+  						content:'../html/temperature.jsp?laid='+data.laid,
+  						btn: ['返回'], 
+				        yes: function(){
+				          layer.closeAll();
+				         
+				        },
+					});
 				break;
 				
 			}

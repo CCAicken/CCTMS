@@ -104,7 +104,14 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="V_AbnormalRR" catalog="CCTMS" class="model.Vabnormalrr">
+	<table name="V_AbnormalRR" catalog="CCTMS"
+		class="model.Vabnormalrr">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_Temperature" catalog="CCTMS"
+	class="model.Ttemperature">
 	<primary-key>
 		<generator class="identity"></generator>
 	</primary-key>

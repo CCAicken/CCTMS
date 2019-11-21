@@ -37,6 +37,7 @@
 		<mapping resource="model/Tabnormalrr.hbm.xml" />
 		<mapping resource="model/TabnormalRecord.hbm.xml" />
 		<mapping resource="model/Vabnormalrr.hbm.xml" />
+		<mapping resource="model/Ttemperature.hbm.xml" />
 
 	</session-factory>
 
