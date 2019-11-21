@@ -8,6 +8,7 @@ import common.properties.OperType;
 import model.Tcar;
 import model.Tpunchthetloc;
 import model.Tuser;
+import model.Vpunchthetloc;
 import annotation.Log;
 import business.basic.iHibBaseDAO;
 import business.basic.iHibBaseDAOImpl;
@@ -23,21 +24,21 @@ public class PunchDaoImpl implements PunchDAO {
 
 	@Log(isSaveLog = false)
 	@Override
-	public List<Tpunchthetloc> getPunchList(String sitename, int page,
+	public List<Vpunchthetloc> getPunchList(String sitename, int page,
 			int pageSize) {
-		String hql = "from Tpunchthetloc ";
+		String hql = "from Vpunchthetloc ";
 		if (sitename != null && !sitename.equals("")) {
 			hql +=  sitename;
 		}
 		hql += " order by pttid asc";
-		List<Tpunchthetloc> list = hdao.selectByPage(hql, page, pageSize);
+		List<Vpunchthetloc> list = hdao.selectByPage(hql, page, pageSize);
 		return list;
 	}
 
 	@Log(isSaveLog = false)
 	@Override
 	public int getPunchList(String sitename) {
-		String hql = "select count(pttid) from Tpunchthetloc ";
+		String hql = "select count(pttid) from Vpunchthetloc ";
 		if (sitename != null && !sitename.equals("")) {
 			hql += sitename +"  ";
 		}

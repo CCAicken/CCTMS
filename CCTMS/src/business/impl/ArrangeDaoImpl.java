@@ -8,6 +8,7 @@ import common.properties.OperType;
 import model.Tcar;
 import model.Tlinearrange;
 import model.Tuser;
+import model.Vlinearrange;
 import annotation.Log;
 import business.basic.iHibBaseDAO;
 import business.basic.iHibBaseDAOImpl;
@@ -23,21 +24,21 @@ public class ArrangeDaoImpl implements ArrangeDAO {
 
 	@Log(isSaveLog = false)
 	@Override
-	public List<Tlinearrange> getArrangeList(String carNum, int page,
+	public List<Vlinearrange> getArrangeList(String carNum, int page,
 			int pageSize) {
-		String hql = "from Tlinearrange ";
+		String hql = "from Vlinearrange ";
 		if (carNum != null && !carNum.equals("")) {
 			hql +=  carNum;
 		}
 		hql += ") order by laid asc";
-		List<Tlinearrange> list = hdao.selectByPage(hql, page, pageSize);
+		List<Vlinearrange> list = hdao.selectByPage(hql, page, pageSize);
 		return list;
 	}
 
 	@Log(isSaveLog = false)
 	@Override
 	public int getArrrangeList(String carNum) {
-		String hql = "select count(laid) from Tlinearrange";
+		String hql = "select count(laid) from Vlinearrange";
 		if (carNum != null && !carNum.equals("")) {
 			hql += carNum +" ) ";
 		}

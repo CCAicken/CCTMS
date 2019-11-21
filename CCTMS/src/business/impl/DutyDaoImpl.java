@@ -5,13 +5,17 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import common.properties.OperType;
+import model.Tcar;
 import model.Tdutyarrange;
 import model.Tline;
+import model.Tuser;
 import model.Vdutyarrange;
 import annotation.Log;
 import business.basic.iHibBaseDAO;
 import business.basic.iHibBaseDAOImpl;
+import business.dao.CarDAO;
 import business.dao.DutyDAO;
+import business.dao.UserDAO;
 
 @Component("dutydao")
 public class DutyDaoImpl implements DutyDAO {
@@ -46,12 +50,21 @@ public class DutyDaoImpl implements DutyDAO {
 	@Log(isSaveLog = true, operationType = OperType.ADD, operationName = "ÃÌº””√ªß")
 	@Override
 	public boolean addUser(Tdutyarrange model) {
-		Integer id = (Integer) hdao.insert(model);
-		if (id != null && !id.equals("")) {
+		UserDAO udao = new UserDaoImpl();
+		Tuser user = udao.getuserbyID(model.getUserid());
+		CarDAO cDao = new CarDaoImpl();
+		Tcar car = cDao.getbyID(model.getCarid().toString());
+		
+		if (user.getStatus() == true || car.getStatus() == true) {
+			Integer id = (Integer) hdao.insert(model);
+			if (id != null && !id.equals("")) {
 
-			return true;
+				return true;
+			}
+			return false;
 		}
 		return false;
+		
 	}
 
 	@Override

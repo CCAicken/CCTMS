@@ -32,6 +32,11 @@
 		<mapping resource="model/Tlinearrange.hbm.xml" />
 		<mapping resource="model/Vdutyarrange.hbm.xml" />
 		<mapping resource="model/Tdutyarrange.hbm.xml" />
+		<mapping resource="model/Vlinearrange.hbm.xml" />
+		<mapping resource="model/Vpunchthetloc.hbm.xml" />
+		<mapping resource="model/Tabnormalrr.hbm.xml" />
+		<mapping resource="model/TabnormalRecord.hbm.xml" />
+		<mapping resource="model/Vabnormalrr.hbm.xml" />
 
 	</session-factory>
 

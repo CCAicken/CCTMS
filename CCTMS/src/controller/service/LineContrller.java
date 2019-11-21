@@ -272,7 +272,7 @@ public class LineContrller {
 		user.setEndpoint(endpoint);
 		user.setStartpoint(startpoint);
 		user.setTaskname(taskname);
-		user.setStatus(false);
+		user.setStatus(true);
 		
 
 		if (audao.addUser(user)) {
@@ -555,7 +555,7 @@ public class LineContrller {
 			laydata.msg = "用户添加成功";
 		} else {
 			laydata.code = LayuiData.ERRR;
-			laydata.msg = "用户添加失败";
+			laydata.msg = "数据添加失败（检查车辆是否可用）";
 		}
 
 		// 回传json字符串
@@ -566,6 +566,61 @@ public class LineContrller {
 		out.flush();
 		out.close();
 
+	}
+	
+	/**
+	 * 获取管理员用户列表
+	 * 
+	 * @param request
+	 * @param page
+	 * @param limit
+	 * @param sitename
+	 * @param xcoordinate
+	 * @param ycoordinate
+	 * @param lid
+	 * @param model
+	 */
+	@RequestMapping(value = "getarrange")
+	public void getArrange(HttpServletRequest request, int page,
+			int limit, String carNum, Integer id,
+			HttpServletResponse response, Model model) {
+
+		ArrangeDAO audao = new ArrangeDaoImpl();
+		// 查询条件
+		Expression exp = new Expression();
+
+		if (carNum != null && !carNum.equals("")) {
+
+			exp.andLeftBraLike("userName", carNum, String.class);
+			
+		}
+		
+		
+		String opreation = exp.toString();
+		// System.out.println(opreation);
+		int allcount = audao.getArrrangeList(opreation);
+
+		List list = audao.getArrangeList(opreation, page, limit);
+
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+
+		LayuiData laydata = new LayuiData();
+		laydata.code = LayuiData.SUCCESS;
+		laydata.msg = "执行成功";
+		laydata.count = allcount;
+		laydata.data = list;
+		Writer out;
+		try {
+			out = response.getWriter();
+			out.write(JSON.toJSONString(laydata));
+			out.flush();
+			out.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// return "";
 	}
 	
 	/**

@@ -107,7 +107,7 @@
 		      
 		      <tr>
 		        <td class="tdbck">备注</td>
-		        <td><span id="remarks"></span></td>
+		        <td><span id="lineRemarks"></span></td>
 		      </tr>
 		      
 		    </tbody>
@@ -205,7 +205,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../basic/getarrange',
+			url : '../line/getarrange',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -217,19 +217,23 @@
 					align : 'center',
 					width : 80
 				}, {
-					field : 'lid',
+					field : 'taskname',
+					title : '线路名称',
+					align : 'center'
+				},{
+					field : 'carNum',
 					title : '车牌号',
 					align : 'center'
 				},{
-					field : 'daid',
-					title : '车牌号',
+					field : 'userName',
+					title : '司机',
 					align : 'center'
 				},{
 					field : 'tthresho',
 					title : '温度阈值',
 					align : 'center'
 				},{
-					field : 'remarks',
+					field : 'lineRemarks',
 					align : 'center',
 					title : '备注'
 				},{

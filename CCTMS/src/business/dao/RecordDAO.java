@@ -3,11 +3,10 @@ package business.dao;
 import java.util.List;
 
 import model.TAdminUser;
+import model.TabnormalRecord;
 import model.Tcar;
-import model.Tpunchthetloc;
 import model.Tuser;
 import model.VAdminUser;
-import model.Vpunchthetloc;
 
 /**
  * 管理端管理员用户业务接口
@@ -15,18 +14,20 @@ import model.Vpunchthetloc;
  * @author Administrator
  *
  */
-public interface PunchDAO {
+public interface RecordDAO {
 
 	/**
-	 * 根据条件获取站点列表
+	 * 根据条件获取车辆列表
 	 * 
 	 * @param carNum
 	 * @return List
 	 */
-	public List<Vpunchthetloc> getPunchList(String sitename, int page,
+	public List<TabnormalRecord> getCarList(String carNum, int page,
 			int pageSize);
 
-	public int getPunchList(String sitename);
+	public int getCarList(String carNum);
+	
+	public List<TabnormalRecord> getCarList();
 	
 	
 
@@ -36,16 +37,16 @@ public interface PunchDAO {
 	 * @param model
 	 */
 
-	public boolean addPunch(Tpunchthetloc model);
+	public boolean addUser(TabnormalRecord model);
 
 
 	/**
 	 * 获取车辆信息
 	 * 
-	 * @param id
-	 *            id
+	 * @param carid
+	 *            用户id
 	 */
-	public Tpunchthetloc getbyID(int carid);
+	public TabnormalRecord getbyID(String carid);
 
 	/**
 	 * 更新用户
@@ -53,5 +54,5 @@ public interface PunchDAO {
 	 * @param user
 	 * @return
 	 */
-	public boolean update(Tpunchthetloc model);
+	public boolean update(TAdminUser user);
 }
