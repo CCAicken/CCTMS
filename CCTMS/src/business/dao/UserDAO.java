@@ -24,6 +24,8 @@ public interface UserDAO {
 			int pageSize);
 
 	public int getUserList(String userName);
+	
+	public List<Tuser> getUserList();
 
 	/**
 	 * 实现一个用户的添加

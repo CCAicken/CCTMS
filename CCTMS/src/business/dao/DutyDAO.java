@@ -4,10 +4,10 @@ import java.util.List;
 
 import model.TAdminUser;
 import model.Tcar;
-import model.Tpunchthetloc;
+import model.Tdutyarrange;
 import model.Tuser;
 import model.VAdminUser;
-import model.Vpunchthetloc;
+import model.Vdutyarrange;
 
 /**
  * 管理端管理员用户业务接口
@@ -15,18 +15,20 @@ import model.Vpunchthetloc;
  * @author Administrator
  *
  */
-public interface PunchDAO {
+public interface DutyDAO {
 
 	/**
-	 * 根据条件获取站点列表
+	 * 根据条件获取车辆列表
 	 * 
 	 * @param carNum
 	 * @return List
 	 */
-	public List<Vpunchthetloc> getPunchList(String sitename, int page,
+	public List<Vdutyarrange> getDutyList(String carNum, int page,
 			int pageSize);
 
-	public int getPunchList(String sitename);
+	public int getDutyList(String carNum);
+	
+	public List<Vdutyarrange> getDutyList();
 	
 	
 
@@ -36,16 +38,16 @@ public interface PunchDAO {
 	 * @param model
 	 */
 
-	public boolean addPunch(Tpunchthetloc model);
+	public boolean addUser(Tdutyarrange model);
 
 
 	/**
 	 * 获取车辆信息
 	 * 
-	 * @param id
-	 *            id
+	 * @param carid
+	 *            用户id
 	 */
-	public Tpunchthetloc getbyID(int carid);
+	public Tdutyarrange getbyID(String carid);
 
 	/**
 	 * 更新用户
@@ -53,5 +55,5 @@ public interface PunchDAO {
 	 * @param user
 	 * @return
 	 */
-	public boolean update(Tpunchthetloc model);
+	public boolean update(Tdutyarrange user);
 }

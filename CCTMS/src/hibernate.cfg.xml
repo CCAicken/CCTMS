@@ -29,6 +29,15 @@
 		<mapping resource="model/Tcar.hbm.xml" />
 		<mapping resource="model/Tline.hbm.xml" />
 		<mapping resource="model/Tpunchthetloc.hbm.xml" />
+		<mapping resource="model/Tlinearrange.hbm.xml" />
+		<mapping resource="model/Vdutyarrange.hbm.xml" />
+		<mapping resource="model/Tdutyarrange.hbm.xml" />
+		<mapping resource="model/Vlinearrange.hbm.xml" />
+		<mapping resource="model/Vpunchthetloc.hbm.xml" />
+		<mapping resource="model/Tabnormalrr.hbm.xml" />
+		<mapping resource="model/TabnormalRecord.hbm.xml" />
+		<mapping resource="model/Vabnormalrr.hbm.xml" />
+		<mapping resource="model/Ttemperature.hbm.xml" />
 
 	</session-factory>
 

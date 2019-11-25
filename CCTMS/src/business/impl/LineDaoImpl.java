@@ -28,7 +28,7 @@ public class LineDaoImpl implements LineDAO {
 		if (carNum != null && !carNum.equals("")) {
 			hql +=  carNum;
 		}
-		hql += ") order by carId asc";
+		hql += ") order by lid asc";
 		List<Tline> list = hdao.selectByPage(hql, page, pageSize);
 		return list;
 	}

@@ -28,6 +28,93 @@ function callAJAX(reqType, reqURL, reqPara) {
  * @param {Object} selectId 要加载到的select控件的id属性名称
  * @param {Object} form layui表单依赖参数form.render("select")，重新渲染
  */
+function loadcar(selectId, form, reqURL){
+	var reqType = 'post';
+	var reqPara = {};
+	var stageData = callAJAX(reqType, reqURL, reqPara)
+	if(stageData != '' && stageData != undefined) {
+		if(stageData.code == 0) {
+			$('#' + selectId).html(""); //获取id为selectId指定的控件内容
+			var str = "<option value='0'>请选择车辆</option>";
+			for(var i = 0; i < stageData.data.length; i++) {
+				str += '<option value=' + stageData.data[i].carId + '>' + stageData.data[i].carNum + '</option>';
+			}
+			$('#' + selectId).append(str);
+			form.render("select");
+		} else {
+			//layer.msg("未获取到阶段信息！");
+			layer.msg('未获取到线路信息！', function(){});
+		}
+	} else {
+		//layer.msg("阶段信息获取失败！");
+		layer.msg('未获取到线路信息！', function(){});
+	}
+	
+}
+
+/**
+ * 线路信息下拉框动态加载
+ * @param {Object} selectId 要加载到的select控件的id属性名称
+ * @param {Object} form layui表单依赖参数form.render("select")，重新渲染
+ */
+function loaduser(selectId, form, reqURL){
+	var reqType = 'post';
+	var reqPara = {};
+	var stageData = callAJAX(reqType, reqURL, reqPara)
+	if(stageData != '' && stageData != undefined) {
+		if(stageData.code == 0) {
+			$('#' + selectId).html(""); //获取id为selectId指定的控件内容
+			var str = "<option value='0'>请选择用户</option>";
+			for(var i = 0; i < stageData.data.length; i++) {
+				str += '<option value=' + stageData.data[i].userid + '>' + stageData.data[i].userName + '</option>';
+			}
+			$('#' + selectId).append(str);
+			form.render("select");
+		} else {
+			//layer.msg("未获取到阶段信息！");
+			layer.msg('未获取到线路信息！', function(){});
+		}
+	} else {
+		//layer.msg("阶段信息获取失败！");
+		layer.msg('未获取到线路信息！', function(){});
+	}
+	
+}
+
+/**
+ * 线路信息下拉框动态加载
+ * @param {Object} selectId 要加载到的select控件的id属性名称
+ * @param {Object} form layui表单依赖参数form.render("select")，重新渲染
+ */
+function loadduty(selectId, form, reqURL){
+	var reqType = 'post';
+	var reqPara = {};
+	var stageData = callAJAX(reqType, reqURL, reqPara)
+	if(stageData != '' && stageData != undefined) {
+		if(stageData.code == 0) {
+			$('#' + selectId).html(""); //获取id为selectId指定的控件内容
+			var str = "<option value='0'>请选择用户</option>";
+			for(var i = 0; i < stageData.data.length; i++) {
+				str += '<option value=' + stageData.data[i].daid + '>' + stageData.data[i].userName + '</option>';
+			}
+			$('#' + selectId).append(str);
+			form.render("select");
+		} else {
+			//layer.msg("未获取到阶段信息！");
+			layer.msg('未获取到线路信息！', function(){});
+		}
+	} else {
+		//layer.msg("阶段信息获取失败！");
+		layer.msg('未获取到线路信息！', function(){});
+	}
+	
+}
+
+/**
+ * 线路信息下拉框动态加载
+ * @param {Object} selectId 要加载到的select控件的id属性名称
+ * @param {Object} form layui表单依赖参数form.render("select")，重新渲染
+ */
 function loadline(selectId, form, reqURL){
 	var reqType = 'post';
 	var reqPara = {};

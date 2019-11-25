@@ -155,7 +155,7 @@ public class EssInformationContrller {
 		user.setUserName(userName);
 		user.setSex(sex);
 		user.setTel(tel);
-		user.setStatus(false);
+		user.setStatus(true);
 		
 
 		if (audao.addUser(user)) {
@@ -300,9 +300,9 @@ public class EssInformationContrller {
 		// String endPwd = EnCriptUtil.getEcriptStr(md5Str, "md5");
 		Tcar user = new Tcar();
 		user.setCarNum(carNum);
-		user.setFanStatus(false);
+		user.setFanStatus(true);
 		user.setRemarks(remarks);
-		user.setStatus(false);
+		user.setStatus(true);
 		
 
 		if (audao.addUser(user)) {

@@ -59,8 +59,59 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="T_PunchTheTloc" catalog="CCTMS"
-	class="model.Tpunchthetloc">
+	<table name="T_PunchTheTloc" catalog="CCTMS"
+		class="model.Tpunchthetloc">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_LineArrange" catalog="CCTMS"
+		class="model.Tlinearrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_DutyArrange" catalog="CCTMS"
+		class="model.Vdutyarrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_DutyArrange" catalog="CCTMS"
+		class="model.Tdutyarrange">
+	</table>
+	<table name="V_LineArrange" catalog="CCTMS"
+		class="model.Vlinearrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_PunchTheTloc" catalog="CCTMS"
+		class="model.Vpunchthetloc">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AbnormalRR" catalog="CCTMS"
+		class="model.Tabnormalrr">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AbnormalRecord" catalog="CCTMS"
+		class="model.TabnormalRecord">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_AbnormalRR" catalog="CCTMS"
+		class="model.Vabnormalrr">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_Temperature" catalog="CCTMS"
+	class="model.Ttemperature">
 	<primary-key>
 		<generator class="identity"></generator>
 	</primary-key>
