@@ -29,6 +29,7 @@ public class LoginFilter extends HttpServlet implements Filter {
 		List<String> notCheckLoginUrls = new ArrayList<String>(); // ²»¼ì²éµÇÂ¼µÄURL
 		notCheckLoginUrls.add("login.html");
 		notCheckLoginUrls.add("adminlogin");
+		notCheckLoginUrls.add("fileuploadservlet.do");
 
 		try {
 			String requestUri = request.getRequestURI();

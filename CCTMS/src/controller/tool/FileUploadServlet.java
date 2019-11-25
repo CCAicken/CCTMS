@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -75,6 +76,19 @@ public class FileUploadServlet extends HttpServlet {
 					// 处理获取到的上传文件的文件名的路径部分，只保留文件名部分
 					filename = filename
 							.substring(filename.lastIndexOf("\\") + 1);
+
+					// 获取文件的后缀名，判断是视频还是图片
+					String filetype = filename.substring(filename
+							.lastIndexOf("."));
+					System.out.println(filetype);
+					String reg = "(.mp4|.flv|.avi|.rm|.rmvb|.wmv)";
+					Pattern p = Pattern.compile(reg);
+					if (p.matcher(filetype).find()) {
+						savePath += "\\video";
+					} else {
+						savePath += "\\image";
+					}
+
 					// 获取item中的上传文件的输入流
 					InputStream in = item.getInputStream();
 					// 创建一个文件输出流
