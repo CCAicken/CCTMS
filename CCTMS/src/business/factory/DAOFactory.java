@@ -8,6 +8,7 @@ import business.dao.AdminUserDAO;
 import business.dao.RoleSysModelDAO;
 import business.dao.SystemLogDAO;
 import business.dao.SystemModelDAO;
+import business.dao.UserDAO;
 
 public class DAOFactory {
 	private static ApplicationContext ctx = null;
@@ -59,6 +60,15 @@ public class DAOFactory {
 	 */
 	public static RoleSysModelDAO getRoleSysModelDAO() {
 		return (RoleSysModelDAO) ctx.getBean("rolesysmodeldao");
+	}
+
+	/**
+	 * 返回一个用于用户操作的RoleSysModelDAO对象
+	 * 
+	 * @return UserDAO
+	 */
+	public static UserDAO getUserDAO() {
+		return (UserDAO) ctx.getBean("userdao");
 	}
 
 }

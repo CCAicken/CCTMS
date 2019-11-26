@@ -2,16 +2,17 @@ package business.impl;
 
 import java.util.List;
 
+import model.Tline;
+import model.Vlinearrange;
+
 import org.springframework.stereotype.Component;
 
-import common.properties.OperType;
-import model.Tcar;
-import model.Tline;
-import model.Tuser;
 import annotation.Log;
 import business.basic.iHibBaseDAO;
 import business.basic.iHibBaseDAOImpl;
 import business.dao.LineDAO;
+
+import common.properties.OperType;
 
 @Component("linedao")
 public class LineDaoImpl implements LineDAO {
@@ -26,7 +27,7 @@ public class LineDaoImpl implements LineDAO {
 	public List<Tline> getCarList(String carNum, int page, int pageSize) {
 		String hql = "from Tline ";
 		if (carNum != null && !carNum.equals("")) {
-			hql +=  carNum;
+			hql += carNum;
 		}
 		hql += ") order by lid asc";
 		List<Tline> list = hdao.selectByPage(hql, page, pageSize);
@@ -38,7 +39,7 @@ public class LineDaoImpl implements LineDAO {
 	public int getCarList(String carNum) {
 		String hql = "select count(lid) from Tline";
 		if (carNum != null && !carNum.equals("")) {
-			hql += carNum +" ) ";
+			hql += carNum + " ) ";
 		}
 		return hdao.selectValue(hql);
 	}
@@ -67,29 +68,41 @@ public class LineDaoImpl implements LineDAO {
 
 	@Override
 	public boolean upStatus(int userid) {
-		Tline modelsql = (Tline) hdao.findById(
-				Tline.class, userid);
+		Tline modelsql = (Tline) hdao.findById(Tline.class, userid);
 		String sql = "";
 		if (modelsql.getStatus()) {
-			//sql = "update Tcar set fanStatus=false where carId="
-					//+modelsql.getCarId();
-			 modelsql.setStatus(false);
+			// sql = "update Tcar set fanStatus=false where carId="
+			// +modelsql.getCarId();
+			modelsql.setStatus(false);
 		} else {
-			//sql = "update Tcar set fanStatus=true where carId="
-					//+ modelsql.getCarId();
-			 modelsql.setStatus(true);
+			// sql = "update Tcar set fanStatus=true where carId="
+			// + modelsql.getCarId();
+			modelsql.setStatus(true);
 		}
 
 		return hdao.update(modelsql);
-		//return hdao.update(sql);
+		// return hdao.update(sql);
 	}
 
 	@Override
 	public List<Tline> getCarList() {
 		String hql = "from Tline ";
-		
+
 		List<Tline> list = hdao.select(hql);
 		return list;
+	}
+
+	@Override
+	public List<Vlinearrange> getAllVLinearrange() {
+		return hdao.select("from Vlinearrange");
+	}
+
+	@Override
+	public List<Vlinearrange> getLinearrangeByUser(String userid) {
+		String hql = "from Vlinearrange where userid=?";
+		Object[] param = { userid };
+
+		return hdao.select(hql, param);
 	}
 
 }

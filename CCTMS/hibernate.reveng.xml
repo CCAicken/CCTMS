@@ -110,8 +110,20 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="T_Temperature" catalog="CCTMS"
-	class="model.Ttemperature">
+	<table name="T_Temperature" catalog="CCTMS"
+		class="model.Ttemperature">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_RealTimePosition" catalog="CCTMS"
+		class="model.TrealTimePosition">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="V_RealTimePosition" catalog="CCTMS"
+	class="model.VrealTimePosition">
 	<primary-key>
 		<generator class="identity"></generator>
 	</primary-key>

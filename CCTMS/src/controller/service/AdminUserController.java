@@ -215,6 +215,7 @@ public class AdminUserController {
 		HttpSession session = request.getSession();
 		VAdminUser loginuser = audao.login(user);
 		if (loginuser != null) {
+			session.setAttribute("usertype", "adminuser");
 			session.setAttribute("loginuser", loginuser);
 			laydata.code = LayuiData.SUCCESS;
 			laydata.msg = "µÇÂ½³É¹¦";

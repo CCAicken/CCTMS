@@ -30,6 +30,7 @@ public class LoginFilter extends HttpServlet implements Filter {
 		notCheckLoginUrls.add("login.html");
 		notCheckLoginUrls.add("adminlogin");
 		notCheckLoginUrls.add("fileuploadservlet.do");
+		notCheckLoginUrls.add("userlogin");
 
 		try {
 			String requestUri = request.getRequestURI();
@@ -56,15 +57,21 @@ public class LoginFilter extends HttpServlet implements Filter {
 
 			// 需要进行身份验证的URL、请求 则检查是否已登陆
 			// System.out.println("user=" + session.getAttribute("loginuser"));
-			if (session.getAttribute("loginuser") == null) {
+			if ((session.getAttribute("usertype").toString() == "user" && session
+					.getAttribute("ornuser") != null)
+					|| (session.getAttribute("loginuser") != null && session
+							.getAttribute("usertype").toString() == "adminuser")) {
+
+				filterChain.doFilter(sRequest, sResponse);
+				return;
 				// System.out.println(arg0.getContextPath());
+
+				// 如果高级别的身份验证，我们还需根据用户角色判断是否有权限
+			} else {
 				response.sendRedirect(request.getContextPath()
 						+ "/html/login.html");
 				return;
-				// 如果高级别的身份验证，我们还需根据用户角色判断是否有权限
-			} else {
-				filterChain.doFilter(sRequest, sResponse);
-				return;
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

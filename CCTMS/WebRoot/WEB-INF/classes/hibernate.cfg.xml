@@ -38,6 +38,8 @@
 		<mapping resource="model/TabnormalRecord.hbm.xml" />
 		<mapping resource="model/Vabnormalrr.hbm.xml" />
 		<mapping resource="model/Ttemperature.hbm.xml" />
+		<mapping resource="model/TrealTimePosition.hbm.xml" />
+		<mapping resource="model/VrealTimePosition.hbm.xml" />
 
 	</session-factory>
 

@@ -2,11 +2,8 @@ package business.dao;
 
 import java.util.List;
 
-import model.TAdminUser;
-import model.Tcar;
 import model.Tline;
-import model.Tuser;
-import model.VAdminUser;
+import model.Vlinearrange;
 
 /**
  * 管理端管理员用户业务接口
@@ -22,13 +19,12 @@ public interface LineDAO {
 	 * @param carNum
 	 * @return List
 	 */
-	public List<Tline> getCarList(String carNum, int page,
-			int pageSize);
+	public List<Tline> getCarList(String carNum, int page, int pageSize);
 
 	public int getCarList(String carNum);
-	
+
 	public List<Tline> getCarList();
-	
+
 	/**
 	 * 实现线路状态修改
 	 * 
@@ -36,7 +32,6 @@ public interface LineDAO {
 	 */
 
 	public boolean upStatus(int userid);
-	
 
 	/**
 	 * 实现一个车辆的添加
@@ -46,7 +41,6 @@ public interface LineDAO {
 
 	public boolean addUser(Tline model);
 
-
 	/**
 	 * 获取车辆信息
 	 * 
@@ -54,6 +48,22 @@ public interface LineDAO {
 	 *            用户id
 	 */
 	public Tline getbyID(String carid);
+
+	/**
+	 * 获取所有线路任务
+	 * 
+	 * @return
+	 */
+	public List<Vlinearrange> getAllVLinearrange();
+
+	/**
+	 * 根据用户id获取线路任务
+	 * 
+	 * @param userid
+	 *            用户id
+	 * @return
+	 */
+	public List<Vlinearrange> getLinearrangeByUser(String userid);
 
 	/**
 	 * 更新用户
