@@ -1,5 +1,6 @@
 package model;
 
+
 /**
  * TabnormalRecord entity. @author MyEclipse Persistence Tools
  */
@@ -13,6 +14,7 @@ public class TabnormalRecord implements java.io.Serializable {
 	private String voiceurl;
 	private String voideurl;
 	private String txtcontent;
+	private String createdate;
 
 	// Constructors
 
@@ -20,13 +22,19 @@ public class TabnormalRecord implements java.io.Serializable {
 	public TabnormalRecord() {
 	}
 
+	/** minimal constructor */
+	public TabnormalRecord(String createdate) {
+		this.createdate = createdate;
+	}
+
 	/** full constructor */
 	public TabnormalRecord(String imageurl, String voiceurl, String voideurl,
-			String txtcontent) {
+			String txtcontent, String createdate) {
 		this.imageurl = imageurl;
 		this.voiceurl = voiceurl;
 		this.voideurl = voideurl;
 		this.txtcontent = txtcontent;
+		this.createdate = createdate;
 	}
 
 	// Property accessors
@@ -69,6 +77,14 @@ public class TabnormalRecord implements java.io.Serializable {
 
 	public void setTxtcontent(String txtcontent) {
 		this.txtcontent = txtcontent;
+	}
+
+	public String getCreatedate() {
+		return this.createdate;
+	}
+
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
 	}
 
 }
