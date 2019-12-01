@@ -2,12 +2,8 @@ package business.dao;
 
 import java.util.List;
 
-import model.TAdminUser;
+import model.TabnormalRecord;
 import model.Tabnormalrr;
-import model.Tcar;
-import model.Tline;
-import model.Tuser;
-import model.VAdminUser;
 import model.Vabnormalrr;
 
 /**
@@ -24,13 +20,12 @@ public interface AbnormalRRDAO {
 	 * @param carNum
 	 * @return List
 	 */
-	public List<Vabnormalrr> getCarList(String carNum, int page,
-			int pageSize);
+	public List<Vabnormalrr> getCarList(String carNum, int page, int pageSize);
 
 	public int getCarList(String carNum);
-	
+
 	public List<Vabnormalrr> getCarList();
-	
+
 	/**
 	 * 实现线路状态修改
 	 * 
@@ -38,16 +33,14 @@ public interface AbnormalRRDAO {
 	 */
 
 	public boolean upStatus(int userid);
-	
 
 	/**
-	 * 实现一个车辆的添加
+	 * 添加异常记录
 	 * 
 	 * @param model
 	 */
 
-	public boolean addUser(Tabnormalrr model);
-
+	public boolean addTabnormalrr(TabnormalRecord model, int lrid);
 
 	/**
 	 * 获取车辆信息
@@ -64,4 +57,22 @@ public interface AbnormalRRDAO {
 	 * @return
 	 */
 	public boolean update(Tabnormalrr user);
+
+	/**
+	 * 根据车辆id获取车辆异常记录
+	 * 
+	 * @param carid
+	 *            车辆id
+	 * @return
+	 */
+	public List<Vabnormalrr> getCarAbnormalRRByCarId(Integer carid);
+
+	/**
+	 * 根据用户id获取车辆异常记录
+	 * 
+	 * @param carid
+	 *            车辆id
+	 * @return
+	 */
+	public List<Vabnormalrr> getCarAbnormalRRByUserId(String userid);
 }

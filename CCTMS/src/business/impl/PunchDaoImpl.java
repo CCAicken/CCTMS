@@ -2,17 +2,17 @@ package business.impl;
 
 import java.util.List;
 
+import model.Tpunchthetloc;
+import model.Vpunchthetloc;
+
 import org.springframework.stereotype.Component;
 
-import common.properties.OperType;
-import model.Tcar;
-import model.Tpunchthetloc;
-import model.Tuser;
-import model.Vpunchthetloc;
 import annotation.Log;
 import business.basic.iHibBaseDAO;
 import business.basic.iHibBaseDAOImpl;
 import business.dao.PunchDAO;
+
+import common.properties.OperType;
 
 @Component("punchdAO")
 public class PunchDaoImpl implements PunchDAO {
@@ -28,7 +28,7 @@ public class PunchDaoImpl implements PunchDAO {
 			int pageSize) {
 		String hql = "from Vpunchthetloc ";
 		if (sitename != null && !sitename.equals("")) {
-			hql +=  sitename;
+			hql += sitename;
 		}
 		hql += " order by pttid asc";
 		List<Vpunchthetloc> list = hdao.selectByPage(hql, page, pageSize);
@@ -40,7 +40,7 @@ public class PunchDaoImpl implements PunchDAO {
 	public int getPunchList(String sitename) {
 		String hql = "select count(pttid) from Vpunchthetloc ";
 		if (sitename != null && !sitename.equals("")) {
-			hql += sitename +"  ";
+			hql += sitename + "  ";
 		}
 		return hdao.selectValue(hql);
 	}
@@ -58,13 +58,18 @@ public class PunchDaoImpl implements PunchDAO {
 
 	@Override
 	public Tpunchthetloc getbyID(int carid) {
-		return (Tpunchthetloc) hdao.findById(Tuser.class, carid);
+		return (Tpunchthetloc) hdao.findById(Tpunchthetloc.class, carid);
 	}
 
 	@Override
 	public boolean update(Tpunchthetloc model) {
 		// TODO Auto-generated method stub
 		return hdao.update(model);
+	}
+
+	@Override
+	public Vpunchthetloc getVpunchthetlocbyID(int carid) {
+		return (Vpunchthetloc) hdao.findById(Vpunchthetloc.class, carid);
 	}
 
 }

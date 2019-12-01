@@ -2,11 +2,7 @@ package business.dao;
 
 import java.util.List;
 
-import model.TAdminUser;
-import model.Tcar;
 import model.Tpunchthetloc;
-import model.Tuser;
-import model.VAdminUser;
 import model.Vpunchthetloc;
 
 /**
@@ -27,8 +23,6 @@ public interface PunchDAO {
 			int pageSize);
 
 	public int getPunchList(String sitename);
-	
-	
 
 	/**
 	 * 实现一个车辆的添加
@@ -38,7 +32,6 @@ public interface PunchDAO {
 
 	public boolean addPunch(Tpunchthetloc model);
 
-
 	/**
 	 * 获取车辆信息
 	 * 
@@ -46,6 +39,15 @@ public interface PunchDAO {
 	 *            id
 	 */
 	public Tpunchthetloc getbyID(int carid);
+
+	/**
+	 * 根据打卡点id获取打卡点视图信息
+	 * 
+	 * @param carid
+	 *            打卡点id
+	 * @return
+	 */
+	public Vpunchthetloc getVpunchthetlocbyID(int carid);
 
 	/**
 	 * 更新用户

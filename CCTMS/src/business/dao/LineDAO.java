@@ -72,4 +72,11 @@ public interface LineDAO {
 	 * @return
 	 */
 	public boolean update(Tline user);
+
+	/**
+	 * 根据用户id获取当前所跑的线路id
+	 * 
+	 * @param userid
+	 */
+	public int getLinIdByUserid(String userid);
 }

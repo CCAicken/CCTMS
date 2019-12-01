@@ -105,4 +105,11 @@ public class LineDaoImpl implements LineDAO {
 		return hdao.select(hql, param);
 	}
 
+	@Override
+	public int getLinIdByUserid(String userid) {
+		String hql = "from Vlinearrange where userid=? and lineStatus=1";
+		Object[] param = { userid };
+
+		return hdao.selectValue(hql, param);
+	}
 }

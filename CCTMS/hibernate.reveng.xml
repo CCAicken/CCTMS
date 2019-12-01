@@ -122,8 +122,14 @@
 			<generator class="identity"></generator>
 		</primary-key>
 	</table>
-<table name="V_RealTimePosition" catalog="CCTMS"
-	class="model.VrealTimePosition">
+	<table name="V_RealTimePosition" catalog="CCTMS"
+		class="model.VrealTimePosition">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_CheckInRecord" catalog="CCTMS"
+	class="model.TcheckRecord">
 	<primary-key>
 		<generator class="identity"></generator>
 	</primary-key>
