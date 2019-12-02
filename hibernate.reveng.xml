@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table name="T_SystemLog" catalog="CCTMS"
+		class="model.TSystemLog">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AdminUser" catalog="CCTMS"
+		class="model.TAdminUser">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AdminRole" catalog="CCTMS"
+		class="model.TAdminRole">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_RoleSystemModel" catalog="CCTMS"
+		class="model.TRoleSystemModel">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_SystemModel" catalog="CCTMS"
+		class="model.TSystemModel">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_AdminUser" catalog="CCTMS"
+		class="model.VAdminUser">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="V_RoleSystemModel" catalog="CCTMS"
+		class="model.VRoleSystemModel">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_User" catalog="CCTMS" class="model.Tuser">
+		<primary-key>
+			<generator class="assigned"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Car" catalog="CCTMS" class="model.Tcar">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Line" catalog="CCTMS" class="model.Tline">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_PunchTheTloc" catalog="CCTMS"
+		class="model.Tpunchthetloc">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_LineArrange" catalog="CCTMS"
+		class="model.Tlinearrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_DutyArrange" catalog="CCTMS"
+		class="model.Vdutyarrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_DutyArrange" catalog="CCTMS"
+		class="model.Tdutyarrange">
+	</table>
+	<table name="V_LineArrange" catalog="CCTMS"
+		class="model.Vlinearrange">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_PunchTheTloc" catalog="CCTMS"
+		class="model.Vpunchthetloc">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AbnormalRR" catalog="CCTMS"
+		class="model.Tabnormalrr">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_AbnormalRecord" catalog="CCTMS"
+		class="model.TabnormalRecord">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_AbnormalRR" catalog="CCTMS"
+		class="model.Vabnormalrr">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_Temperature" catalog="CCTMS"
+		class="model.Ttemperature">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="T_RealTimePosition" catalog="CCTMS"
+		class="model.TrealTimePosition">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+	<table name="V_RealTimePosition" catalog="CCTMS"
+		class="model.VrealTimePosition">
+		<primary-key>
+			<generator class="identity"></generator>
+		</primary-key>
+	</table>
+<table name="T_CheckInRecord" catalog="CCTMS"
+	class="model.TcheckRecord">
+	<primary-key>
+		<generator class="identity"></generator>
+	</primary-key>
+</table>
+</hibernate-reverse-engineering>

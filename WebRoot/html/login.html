@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>登入 - layuiAdmin</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+   <link rel="stylesheet" href="../layui/css/admin.css" media="all">
+   <link rel="stylesheet" href="../layui/css/login.css" media="all">
+</head>
+<style>
+	{ background:url("../image/login_bg.jpg") no-repeat center center; background-size:100% 100%;-moz-background-size:100% 100%;}
+</style>
+<body>
+
+  <div class="layadmin-user-login layadmin-user-display-show" id="LAY-user-login">
+
+    <div class="layadmin-user-login-main">
+      <div class="layadmin-user-login-box layadmin-user-login-header">
+        <h2>权限管理系统</h2>
+        <p>后台登录页面</p>
+      </div>
+      <div class="layadmin-user-login-box layadmin-user-login-body layui-form" style="background-color: white;border: 1px solid white;border-radius: 10px;">
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
+          <input type="text" name="username" id="user_name" lay-verify="required" placeholder="用户名" class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
+          <input type="password" name="password" id="user_password" lay-verify="required" placeholder="密码" class="layui-input">
+        </div>
+        <!-- <div class="layui-form-item">
+          <div class="layui-row">
+            <div class="layui-col-xs7">
+              <label class="layadmin-user-login-icon layui-icon layui-icon-vercode" for="LAY-user-login-vercode"></label>
+              <input type="text" name="vercode" id="LAY-user-login-vercode" lay-verify="required" placeholder="图形验证码" class="layui-input">
+            </div>
+            <div class="layui-col-xs5">
+              <div style="margin-left: 10px;">
+                <img src="https://www.oschina.net/action/user/captcha" class="layadmin-user-login-codeimg" id="LAY-user-get-vercode">
+              </div>
+            </div>
+          </div> 
+        </div>-->
+        <div class="layui-form-item">
+          <button class="layui-btn layui-btn-fluid" id ="login-button" type="button" >登 入</button>
+        </div>
+      </div>
+    </div>
+ </div>
+    <div class="layui-trans layadmin-user-login-footer">
+      
+      <p>© 2018 <a href="http://www.layui.com/" target="_blank">layui.com</a></p>
+      <p>
+        <span><a href="" target="_blank">云南工商学院</a></span>
+        <span><a href="" target="_blank">版权号</a></span>
+        <span><a href="" target="_blank">地址</a></span>
+      </p>
+    </div>
+   
+
+	<script src="../js/jquery-3.3.1.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../lib/md5.js" ></script>
+	<script src="../layui/layui.all.js" charset="utf-8"></script>
+ 	<script>
+		layui.use(['form','layer'], function(){
+			var layer = layui.layer
+			var form = layui.form;	  
+			var $ = layui.jquery;
+			/* 点击登录 */
+			$("#login-button").click(function(){
+				var username=$("#user_name").val().trim();
+				var password=$("#user_password").val().trim();
+		
+				if(username==null || username=="" || username==undefined){
+				layer.tips('用户名不能为空！', '#user_name', {
+					tips : [ 1, '#3595CC' ],
+					time : 3000
+				});
+					$("#user_name").focus();
+					return;
+				}
+				if(password==null || password=="" || password==undefined){
+				layer.tips('密码不能为空！', '#user_password', {
+					tips : [ 1, '#3595CC' ],
+					time : 3000
+				});
+					$("#user_password").focus();
+					return;
+				}
+				if(password.length<6 || password.length>18){
+				layer.tips('密码长度不符合规范！', '#user_password', {
+					tips : [ 1, '#3595CC' ],
+					time : 3000
+				});
+					return;
+				}
+				
+				//var enpwd = hex_md5(fix(username,password));
+				//$("#inppassword").val(enpwd);
+				
+				//alert(enpwd);
+				$.ajax({
+					type : 'get',
+					url : '../admin/adminlogin?userid='+username+'&pwd='+password,
+					datatype : 'json',
+					beforeSend:function(){
+					//layer.load(0, {shade: false});
+					},
+					success : function(data) {
+						if (data.code == 0) {
+						layer.msg(data.msg);
+						//layer.alert(data.msg, {icon: 1});
+						if (top.location !== self.location) {
+   							 top.location = "index.jsp";//跳出框架，并回到首页
+			         	}else{
+			         		window.location.href = "../html/index.jsp";
+			         	}
+						
+						} else {
+							layer.alert(data.msg, {icon: 2});
+							$("input").val("");
+						}
+					},
+					error:function(){
+					
+	    	        	layer.alert("后台报错", {icon: 2});
+	    	        },
+	    	       /* complete:function(){
+	    	        layer.alert("操作完成");
+	    	        }*/
+				});
+			
+			});
+		
+			
+	});
+	</script>
+</body>
+</html>
