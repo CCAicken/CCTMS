@@ -197,15 +197,15 @@
 			laydate = layui.laydate, laytpl = layui.laytpl,
 			element = layui.element;
 	
-		loadline("addline",form,"../line/getloacdline");
-		loadline("slline",form,"../line/getloacdline");
-		loadduty("adddaid",form,"../line/getloacdduty");
+		loadline("addline",form,"../linecontoller/getloacdline");
+		loadline("slline",form,"../linecontoller/getloacdline");
+		loadduty("adddaid",form,"../linecontoller/getloacdduty");
 		/*加载表格*/
 		/*加载表格*/
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../line/getarrange',
+			url : '../linecontoller/getarrange',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -306,7 +306,7 @@
 					
 					$.ajax({
 						type : 'get',
-						url : '../line/addarrange?lid=' + addline +'&daid='+adddaid+'&tthresho='+addtthresho+'&remarks='+addremarks,
+						url : '../linecontoller/addarrange?lid=' + addline +'&daid='+adddaid+'&tthresho='+addtthresho+'&remarks='+addremarks,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {

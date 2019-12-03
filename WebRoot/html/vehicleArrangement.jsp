@@ -170,13 +170,13 @@
 			element = layui.element;
 	
 		//加载角色类型
-		loaduser("adduserid",form,"../line/getloacduser");
-		loadcar("addcarid",form,"../line/getloacdcar");
+		loaduser("adduserid",form,"../linecontoller/getloacduser");
+		loadcar("addcarid",form,"../linecontoller/getloacdcar");
 		/*加载表格*/
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../line/getduty',
+			url : '../linecontoller/getduty',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -255,7 +255,7 @@
 					
 					$.ajax({
 						type : 'get',
-						url : '../line/addduty?userid=' + adduserid +'&carid='+addcarid,
+						url : '../linecontoller/addduty?userid=' + adduserid +'&carid='+addcarid,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {

@@ -212,7 +212,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../line/getline',
+			url : '../linecontoller/getline',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -283,7 +283,7 @@
   	 			//data.value
   	 			$.ajax({
 				type : 'get',
-				url : '../line/changestate?id=' + this.value,
+				url : '../linecontoller/changestate?id=' + this.value,
 				datatype : 'json',
 				success : function(data) {
 					if (data.code == "0") {		
@@ -299,7 +299,7 @@
   	 		}else{
   	 			$.ajax({
 				type : 'get',
-				url : '../line/changestate?id=' + this.value,
+				url : '../linecontoller/changestate?id=' + this.value,
 				datatype : 'json',
 				success : function(data) {
 					if (data.code == "0") {		
@@ -356,7 +356,7 @@
 					
 					$.ajax({
 						type : 'get',
-						url : '../line/addline?taskname=' + addtaskname +'&startpoint='+addstartpoint+'&endpoint='+addendpoint,
+						url : '../linecontoller/addline?taskname=' + addtaskname +'&startpoint='+addstartpoint+'&endpoint='+addendpoint,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {

@@ -168,9 +168,9 @@
 			element = layui.element;
 			
 		//调用方法加载select管理员角色
-		loadline("slline",form,"../line/getloacdline");
+		loadline("slline",form,"../linecontoller/getloacdline");
 		
-		loadline("addline",form,"../line/getloacdline");
+		loadline("addline",form,"../linecontoller/getloacdline");
 		
 		
 	
@@ -180,7 +180,7 @@
 		table.render({
 			elem : '#blogUser',
 			id:'adminUserid',
-			url : '../line/getpunch',
+			url : '../linecontoller/getpunch',
 			title : '管理员用户数据表',
 			height: "full-160",
 			skin : 'line',
@@ -284,7 +284,7 @@
 					
 					$.ajax({
 						type : 'get',
-						url : '../line/addpunch?sitename=' + addsitename +'&xcoordinate='+addxcoordinate+'&ycoordinate='+addycoordinate+'&lid='+addline,
+						url : '../linecontoller/addpunch?sitename=' + addsitename +'&xcoordinate='+addxcoordinate+'&ycoordinate='+addycoordinate+'&lid='+addline,
 						datatype : 'json',
 						success : function(data) {
 							if (data.code == "0") {
