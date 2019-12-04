@@ -67,7 +67,7 @@
 		
 		
 		<script type="text/html" id="barDemo">
-			
+			<a class="layui-btn layui-btn layui-btn-xs" lay-event="add">生成二维码</a>
 			<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 		</script>
 
@@ -156,10 +156,19 @@
     </div>
 		</div>
 		<!-- 地图坐标点选择弹窗End -->
+		
+		
 	</div>
+	
+	<!--打卡二维码内容Start-->
+	<div id="erweima" class="erweima">			
+		<div id="qrcode" style="width:200px; height:200px;margin-top:100px;margin-left:200px"></div>
+	</div>
+		<!--打卡二维码内容End-->
 	<script src="../js/jquery-3.3.1.js" charset="utf-8"></script>
 	<script src="../js/loadselect.js" charset="utf-8"></script>
 	<script src="../layui/layui.js" charset="utf-8"></script>
+	<script src="../js/qrcode.min.js" charset="utf-8"></script>
 	<script>
 	layui.use([ 'table', 'form', 'layer', 'laydate', 'laytpl', 'element' ], function() {
 		var table = layui.table, form = layui.form, 
@@ -333,34 +342,41 @@
         		},
 			});
 		});
+		
+		//生成二维码的方法
+		var qrcode = new QRCode(document.getElementById("qrcode"),{
+			width : 200,
+        	height : 200
+		});
+		function makeCode (elText) {		
+			qrcode.makeCode(elText);
+		}
 	
 		//表格工具栏事件 
 		table.on('tool(blogUser)', function(obj) {
 			var data = obj.data;
-			$("#txtclaid").text(data.userid);
-			$("#addremarks").text(data.realname);
-			$("#txtadminuserusertype").text(data.name);
-			$("#txtadminuserdesc").text(data.signed);
-			$("#txtadmincreatetime").text(data.createtime);
-			
 			switch (obj.event) {
-				case 'seluser':
+				//生成二维码按钮操作
+				case 'add':
+					var eltext = data.pttid+"";
+					makeCode(eltext);
 					layer.open({
-				        type: 1, 
-				        title: '管理员信息详情',
-				        area: ['600px', '430px'],
-				        shade: 0.8,
-				        content: $('#adminuserdetail'),
-				        btn: ['返回'], 
-				        yes: function(){
-				          layer.closeAll();
-				          $(".adminuserdetail").css("display","none");
-				        },
-				        cancel: function(){ 
-						  $(".adminuserdetail").css("display","none");
-						}
-				    });
+					        type: 1, 
+					        title: '站点打卡二维码',
+					        area: ['600px', '430px'],
+					        shade: 0.8,
+					        content: $('#erweima'),
+					        btn: ['返回'], 
+					        yes: function(){
+					          	layer.closeAll();
+					          	$(".erweima").css("display","none");
+					        },
+					        cancel: function(){ 
+							  $(".erweima").css("display","none");
+							}
+				    	});
 				break;
+				
 				
 				//删除按钮操作
 				case 'del':
@@ -404,7 +420,6 @@
 						layer.closeAll();
 					});
 				break;
-				
 			}
 			;
 		});
